@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
-import { ArrowRight, Search, Star, ChevronLeft, ChevronRight, X, Menu } from 'lucide-react'
+import { ArrowRight, Search, Star, X, Menu } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
 
@@ -114,14 +114,14 @@ export default function HomePage() {
         setActiveTestimonial((prev) => (prev + 1) % testimonials.length)
     }, [])
 
-    const prevTestimonial = useCallback(() => {
-        setActiveTestimonial((prev) => (prev - 1 + testimonials.length) % testimonials.length)
-    }, [])
-
     useEffect(() => {
-        const interval = setInterval(nextMentor, 5000)
-        return () => clearInterval(interval)
-    }, [nextMentor])
+        const mentorInterval = setInterval(nextMentor, 5000)
+        const testimonialInterval = setInterval(nextTestimonial, 8000)
+        return () => {
+            clearInterval(mentorInterval)
+            clearInterval(testimonialInterval)
+        }
+    }, [nextMentor, nextTestimonial])
 
     const toggleMobileMenu = () => {
         setIsMobileMenuOpen(!isMobileMenuOpen)
@@ -129,7 +129,7 @@ export default function HomePage() {
 
     return (
         <div className="min-h-screen bg-background-light text-text-primary">
-            <header className="bg-secondary text-white py-4 sticky top-0 z-10">
+            <header className="bg-secondary text-white py-4 sticky top-0 z-20">
                 <div className="container mx-auto flex justify-between items-center">
                     <h1 className="text-2xl font-bold">MentorConnect</h1>
                     <nav className="hidden md:block">
@@ -154,7 +154,7 @@ export default function HomePage() {
 
             <MobileMenu isOpen={isMobileMenuOpen} onClose={() => setIsMobileMenuOpen(false)} />
 
-            <main className="container mx-auto mt-12">
+            <main className="container mx-auto mt-12 px-4">
                 <section className="text-center mb-16">
                     <h2 className="text-4xl md:text-5xl font-bold mb-4 text-[#0B090A]">Find Your Perfect Mentor</h2>
                     <p className="text-lg md:text-xl mb-8 text-[#161A1D]">Accelerate your career with personalized guidance from industry experts</p>
@@ -169,7 +169,7 @@ export default function HomePage() {
                     </div>
                 </section>
 
-                <section className="mb-16 flex flex-col md:flex-row items-center justify-between">
+                <section className="mb-16 flex flex-col md:flex-row items-start justify-between">
                     <div className="w-full md:w-1/2 mb-8 md:mb-0">
                         <h3 className="text-3xl font-bold mb-6 text-[#0B090A]">Featured Mentors</h3>
                         <div className="relative h-[400px] w-full max-w-[400px] mx-auto">
@@ -217,20 +217,6 @@ export default function HomePage() {
                                 </div>
                             </CardContent>
                         </Card>
-                        <Button
-                            className="absolute left-0 top-1/2 transform -translate-y-1/2 -translate-x-full bg-[#A4161A] hover:bg-[#BA181B] text-white"
-                            onClick={prevTestimonial}
-                            aria-label="Previous testimonial"
-                        >
-                            <ChevronLeft className="h-6 w-6" />
-                        </Button>
-                        <Button
-                            className="absolute right-0 top-1/2 transform -translate-y-1/2 translate-x-full bg-[#A4161A] hover:bg-[#BA181B] text-white"
-                            onClick={nextTestimonial}
-                            aria-label="Next testimonial"
-                        >
-                            <ChevronRight className="h-6 w-6" />
-                        </Button>
                     </div>
                 </div>
             </section>
