@@ -1,4 +1,4 @@
-"use client"
+'use client'
 
 import React, { useState } from 'react'
 import { Button } from "@/components/ui/button"
@@ -8,7 +8,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { ArrowRight, Users, UserPlus, Briefcase, GraduationCap } from 'lucide-react'
 import Link from 'next/link'
 
-export default function SignUpPage() {
+export default function LoginPage() {
     const [activeTab, setActiveTab] = useState<'mentor' | 'mentee'>('mentor')
 
     const handleTabChange = (value: 'mentor' | 'mentee') => {
@@ -41,61 +41,87 @@ export default function SignUpPage() {
                 </div>
             </div>
 
-            {/* Right side with sign-up forms */}
+            {/* Right side with login forms */}
             <div className="w-full md:w-2/3 p-8 flex items-center justify-center bg-gradient-to-br from-[#F5F3F4] to-[#D3D3D3]">
                 <Card className="w-full max-w-2xl shadow-lg hover:shadow-xl transition-shadow duration-300">
                     <CardHeader>
-                        <CardTitle className="text-3xl font-bold text-center text-[#0B090A]">Join MentorConnect</CardTitle>
+                        <CardTitle className="text-3xl font-bold text-center text-[#0B090A]">Log In</CardTitle>
                     </CardHeader>
                     <CardContent>
                         <Tabs value={activeTab} onValueChange={handleTabChange as (value: string) => void} className="w-full">
                             <TabsList className="grid w-full grid-cols-2 mb-8">
                                 <TabsTrigger
                                     value="mentor"
-                                    className={`text-lg font-semibold py-3 ${activeTab === 'mentor' ? 'bg-[#A4161A] text-white' : 'bg-[#D3D3D3] text-[#0B090A]'} transition-colors duration-300`}
+                                    className={`text-lg font-semibold py-3 rounded-full transition-all duration-300 ${
+                                        activeTab === 'mentor'
+                                            ? 'bg-[#A4161A] text-white shadow-md'
+                                            : 'bg-[#D3D3D3] text-[#0B090A]'
+                                    } hover:bg-[#A4161A] hover:text-white hover:shadow-md`}
                                 >
-                                    Sign Up as Mentor
+                                    Log In as Mentor
                                 </TabsTrigger>
                                 <TabsTrigger
                                     value="mentee"
-                                    className={`text-lg font-semibold py-3 ${activeTab === 'mentee' ? 'bg-[#A4161A] text-white' : 'bg-[#D3D3D3] text-[#0B090A]'} transition-colors duration-300`}
+                                    className={`text-lg font-semibold py-3 rounded-full transition-all duration-300 ${
+                                        activeTab === 'mentee'
+                                            ? 'bg-[#A4161A] text-white shadow-md'
+                                            : 'bg-[#D3D3D3] text-[#0B090A]'
+                                    } hover:bg-[#A4161A] hover:text-white hover:shadow-md`}
                                 >
-                                    Sign Up as Mentee
+                                    Log In as Mentee
                                 </TabsTrigger>
                             </TabsList>
                             <TabsContent value="mentor">
-                                <form className="space-y-4">
-                                    <Input placeholder="Full Name" className="bg-white border-[#B1A7A6] focus:border-[#E5383B] transition-colors duration-300" />
-                                    <Input type="email" placeholder="Email" className="bg-white border-[#B1A7A6] focus:border-[#E5383B] transition-colors duration-300" />
-                                    <Input type="password" placeholder="Password" className="bg-white border-[#B1A7A6] focus:border-[#E5383B] transition-colors duration-300" />
-                                    <Input placeholder="Area of Expertise" className="bg-white border-[#B1A7A6] focus:border-[#E5383B] transition-colors duration-300" />
-                                    <Input placeholder="Years of Experience" className="bg-white border-[#B1A7A6] focus:border-[#E5383B] transition-colors duration-300" />
-                                    <Button className="w-full bg-[#A4161A] hover:bg-[#BA181B] text-white transition-colors duration-300 flex items-center justify-center">
-                                        Sign Up as Mentor <ArrowRight className="ml-2" size={18} />
+                                <form className="space-y-6">
+                                    <div>
+                                        <Input 
+                                            type="email" 
+                                            placeholder="Email" 
+                                            className="bg-white border-[#B1A7A6] focus:border-[#E5383B] transition-colors duration-300 rounded-full py-6"
+                                        />
+                                    </div>
+                                    <div>
+                                        <Input 
+                                            type="password" 
+                                            placeholder="Password" 
+                                            className="bg-white border-[#B1A7A6] focus:border-[#E5383B] transition-colors duration-300 rounded-full py-6"
+                                        />
+                                    </div>
+                                    <Button className="w-full bg-[#A4161A] hover:bg-[#BA181B] text-white transition-colors duration-300 flex items-center justify-center rounded-full py-6">
+                                        Log In as Mentor <ArrowRight className="ml-2" size={18} />
                                     </Button>
                                 </form>
-                                <p className="mt-4 text-center text-sm text-[#660708]">
-                                    Already have an account?{" "}
+                                <p className="mt-6 text-center text-sm text-[#660708]">
+                                    Don't have an account?{" "}
                                     <Link href="#" className="font-medium text-[#E5383B] hover:underline transition-colors duration-300">
-                                        Sign in
+                                        Sign up
                                     </Link>
                                 </p>
                             </TabsContent>
                             <TabsContent value="mentee">
-                                <form className="space-y-4">
-                                    <Input placeholder="Full Name" className="bg-white border-[#B1A7A6] focus:border-[#E5383B] transition-colors duration-300" />
-                                    <Input type="email" placeholder="Email" className="bg-white border-[#B1A7A6] focus:border-[#E5383B] transition-colors duration-300" />
-                                    <Input type="password" placeholder="Password" className="bg-white border-[#B1A7A6] focus:border-[#E5383B] transition-colors duration-300" />
-                                    <Input placeholder="Field of Interest" className="bg-white border-[#B1A7A6] focus:border-[#E5383B] transition-colors duration-300" />
-                                    <Input placeholder="Current Occupation" className="bg-white border-[#B1A7A6] focus:border-[#E5383B] transition-colors duration-300" />
-                                    <Button className="w-full bg-[#A4161A] hover:bg-[#BA181B] text-white transition-colors duration-300 flex items-center justify-center">
-                                        Sign Up as Mentee <ArrowRight className="ml-2" size={18} />
+                                <form className="space-y-6">
+                                    <div>
+                                        <Input 
+                                            type="email" 
+                                            placeholder="Email" 
+                                            className="bg-white border-[#B1A7A6] focus:border-[#E5383B] transition-colors duration-300 rounded-full py-6"
+                                        />
+                                    </div>
+                                    <div>
+                                        <Input 
+                                            type="password" 
+                                            placeholder="Password" 
+                                            className="bg-white border-[#B1A7A6] focus:border-[#E5383B] transition-colors duration-300 rounded-full py-6"
+                                        />
+                                    </div>
+                                    <Button className="w-full bg-[#A4161A] hover:bg-[#BA181B] text-white transition-colors duration-300 flex items-center justify-center rounded-full py-6">
+                                        Log In as Mentee <ArrowRight className="ml-2" size={18} />
                                     </Button>
                                 </form>
-                                <p className="mt-4 text-center text-sm text-[#660708]">
-                                    Already have an account?{" "}
+                                <p className="mt-6 text-center text-sm text-[#660708]">
+                                    Don't have an account?{" "}
                                     <Link href="#" className="font-medium text-[#E5383B] hover:underline transition-colors duration-300">
-                                        Sign in
+                                        Sign up
                                     </Link>
                                 </p>
                             </TabsContent>
