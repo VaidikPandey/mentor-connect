@@ -143,7 +143,7 @@ export default function HomePage() {
                     </nav>
                     <div className="hidden md:block">
                         <Link href="/signup">
-                            <Button className="bg-primary hover:bg-primary-hover text-white transition-colors">Sign Up</Button>
+                            <Button className="bg-primary hover:bg-primary-hover text-white transition-colors">Sign up / Sign in</Button>
                         </Link>
                     </div>
                     <button className="md:hidden text-white" onClick={toggleMobileMenu}>
