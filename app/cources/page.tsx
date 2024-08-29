@@ -71,35 +71,35 @@ export default function CoursesPage() {
                     Explore Our <span className="text-secondary">Expert-Led Courses</span>
                 </h1>
 
-                <div className="mb-8 flex flex-col space-y-4">
-                    <div className="w-full relative">
+                <div className="mb-8 flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-4">
+                    <div className="w-full md:w-2/3 relative">
                         <Input
                             type="text"
                             placeholder="Search courses..."
                             value={searchTerm}
                             onChange={(e) => setSearchTerm(e.target.value)}
-                            className="w-full pl-10 pr-4 py-2 rounded-full border-2 border-primary focus:outline-none focus:border-secondary transition-colors duration-300"
+                            className="w-full pl-10 pr-4 py-3 rounded-full border-2 border-primary focus:outline-none focus:border-secondary transition-colors duration-300"
                         />
-                        <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-primary" size={20} />
+                        <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-primary" size={24} />
                     </div>
-                    <div className="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
+                    <div className="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4 w-full md:w-1/3">
                         <Select value={selectedCategory} onValueChange={setSelectedCategory}>
-                            <SelectTrigger className="w-full sm:w-1/2">
+                            <SelectTrigger className="w-full sm:w-1/2  bg-white border-2 border-primary" >
                                 <SelectValue placeholder="Category" />
                             </SelectTrigger>
-                            <SelectContent>
+                            <SelectContent className="bg-white">
                                 {categories.map(category => (
-                                    <SelectItem key={category} value={category}>{category}</SelectItem>
+                                    <SelectItem key={category} value={category} className="hover:bg-gray-100">{category}</SelectItem>
                                 ))}
                             </SelectContent>
                         </Select>
                         <Select value={selectedLevel} onValueChange={setSelectedLevel}>
-                            <SelectTrigger className="w-full sm:w-1/2">
+                            <SelectTrigger className="w-full sm:w-1/2  bg-white border-2 border-primary">
                                 <SelectValue placeholder="Level" />
                             </SelectTrigger>
-                            <SelectContent>
+                            <SelectContent className="bg-white">
                                 {levels.map(level => (
-                                    <SelectItem key={level} value={level}>{level}</SelectItem>
+                                    <SelectItem key={level} value={level} className="hover:bg-gray-100">{level}</SelectItem>
                                 ))}
                             </SelectContent>
                         </Select>

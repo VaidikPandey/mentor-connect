@@ -18,7 +18,7 @@ const seminars = [
     { id: 9, title: "Mobile App Development with Flutter", category: "Mobile Development", date: "2023-08-05", time: "10:00", duration: "4 hours", capacity: 45, enrolled: 35, rating: 4.6, level: "Intermediate", instructor: "Ian Taylor", price: 3699, thumbnail: "/placeholder.svg?height=400&width=600" },
 ]
 
-export default function SeminarsPage() {
+export default function Component() {
     const [searchTerm, setSearchTerm] = useState("")
     const [selectedCategory, setSelectedCategory] = useState("All")
     const [selectedLevel, setSelectedLevel] = useState("All")
@@ -42,7 +42,7 @@ export default function SeminarsPage() {
                     <nav className="hidden md:block">
                         <ul className="flex space-x-6">
                             <li><Link href="/" className="hover:text-primary transition-colors">Home</Link></li>
-                            <li><Link href="/cources" className="hover:text-primary transition-colors">Courses</Link></li>
+                            <li><Link href="/courses" className="hover:text-primary transition-colors">Courses</Link></li>
                             <li><Link href="/pricing" className="hover:text-primary transition-colors">Pricing</Link></li>
                             <li><Link href="/signup" className="bg-[#E5383B] hover:bg-[#A4161A] text-white px-4 py-2 rounded transition-colors">Sign Up</Link></li>
                         </ul>
@@ -58,7 +58,7 @@ export default function SeminarsPage() {
                     <nav className="container mx-auto px-4">
                         <ul className="space-y-2">
                             <li><Link href="/" className="block hover:text-primary transition-colors">Home</Link></li>
-                            <li><Link href="/courses" className="block hover:text-primary transition-colors">Courses</Link></li>
+                            <li><Link href="/cources" className="block hover:text-primary transition-colors">Courses</Link></li>
                             <li><Link href="/pricing" className="block hover:text-primary transition-colors">Pricing</Link></li>
                             <li><Link href="/signup" className="block bg-[#E5383B] hover:bg-[#A4161A] text-white px-4 py-2 rounded transition-colors mt-2">Sign Up</Link></li>
                         </ul>
@@ -67,39 +67,43 @@ export default function SeminarsPage() {
             )}
 
             <main className="container mx-auto px-4 py-8 flex-grow">
-                <h1 className="text-3xl md:text-4xl font-bold mb-6 text-center text-primary">
-                    Connect with <span className="text-secondary">Expert Mentors</span>
+                <h1 className="text-3xl md:text-4xl font-bold mb-6 text-center">
+                    Connect with <span className="text-[#E5383B]">Expert Mentors</span>
                 </h1>
 
-                <div className="mb-8 flex flex-col space-y-4">
-                    <div className="w-full relative">
+                <div className="mb-8 flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-4">
+                    <div className="w-full md:w-2/3 relative">
                         <Input
                             type="text"
                             placeholder="Search seminars..."
                             value={searchTerm}
                             onChange={(e) => setSearchTerm(e.target.value)}
-                            className="w-full pl-10 pr-4 py-2 rounded-full border-2 border-primary focus:outline-none focus:border-secondary transition-colors duration-300"
+                            className="w-full pl-10 pr-4 py-3 rounded-full border-2 border-primary focus:outline-none focus:border-[#E5383B] transition-colors duration-300 text-lg"
                         />
-                        <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-primary" size={20} />
+                        <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-primary" size={24} />
                     </div>
-                    <div className="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
+                    <div className="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4 w-full md:w-1/3">
                         <Select value={selectedCategory} onValueChange={setSelectedCategory}>
-                            <SelectTrigger className="w-full sm:w-1/2">
+                            <SelectTrigger className="w-full sm:w-1/2 bg-white border-2 border-primary">
                                 <SelectValue placeholder="Category" />
                             </SelectTrigger>
-                            <SelectContent>
+                            <SelectContent className="bg-white">
                                 {categories.map(category => (
-                                    <SelectItem key={category} value={category}>{category}</SelectItem>
+                                    <SelectItem key={category} value={category} className="hover:bg-gray-100">
+                                        {category}
+                                    </SelectItem>
                                 ))}
                             </SelectContent>
                         </Select>
                         <Select value={selectedLevel} onValueChange={setSelectedLevel}>
-                            <SelectTrigger className="w-full sm:w-1/2">
+                            <SelectTrigger className="w-full sm:w-1/2 bg-white border-2 border-primary">
                                 <SelectValue placeholder="Level" />
                             </SelectTrigger>
-                            <SelectContent>
+                            <SelectContent className="bg-white">
                                 {levels.map(level => (
-                                    <SelectItem key={level} value={level}>{level}</SelectItem>
+                                    <SelectItem key={level} value={level} className="hover:bg-gray-100">
+                                        {level}
+                                    </SelectItem>
                                 ))}
                             </SelectContent>
                         </Select>

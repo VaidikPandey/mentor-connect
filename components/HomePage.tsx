@@ -93,7 +93,7 @@ const MobileMenu: React.FC<MobileMenuProps> = ({ isOpen, onClose }) => {
                 <Link href="#" className="text-white py-2 hover:text-primary transition-colors" onClick={onClose}>Find a Mentor</Link>
                 <Link href="/signup" className="text-white py-2 hover:text-primary transition-colors" onClick={onClose}>Become a Mentor</Link>
                 <Link href="/seminars" className="text-white py-2 hover:text-primary transition-colors" onClick={onClose}>Seminars</Link>
-                <Link href="#" className="text-white py-2 hover:text-primary transition-colors" onClick={onClose}>Courses</Link>
+                <Link href="/cources" className="text-white py-2 hover:text-primary transition-colors" onClick={onClose}>Courses</Link>
                 <Link href="#" className="text-white py-2 hover:text-primary transition-colors" onClick={onClose}>Pricing</Link>
                 <Link href="/signup" className="text-white py-2 hover:text-primary transition-colors" onClick={onClose}>Sign Up</Link>
             </nav>
