@@ -42,9 +42,10 @@ export default function CoursesPage() {
                     <nav className="hidden md:block">
                         <ul className="flex space-x-6">
                             <li><Link href="/" className="hover:text-primary transition-colors">Home</Link></li>
+                            <li><Link href="/findMentor" className="hover:text-primary transition-colors">Find a Mentor</Link></li>
                             <li><Link href="/seminars" className="hover:text-primary transition-colors">Seminars</Link></li>
                             <li><Link href="/pricing" className="hover:text-primary transition-colors">Pricing</Link></li>
-                            <li><Link href="/signup" className="bg-[#E5383B] hover:bg-[#A4161A] text-white px-4 py-2 rounded transition-colors">Sign Up</Link></li>
+                            <li><Link href="/signup" className="bg-[#E5383B] hover:bg-[#A4161A] text-white px-4 py-2 rounded transition-colors">Login/Signup</Link></li>
                         </ul>
                     </nav>
                     <button className="md:hidden text-white" onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}>
@@ -60,7 +61,7 @@ export default function CoursesPage() {
                             <li><Link href="/" className="block hover:text-primary transition-colors">Home</Link></li>
                             <li><Link href="/seminars" className="block hover:text-primary transition-colors">Seminars</Link></li>
                             <li><Link href="/pricing" className="block hover:text-primary transition-colors">Pricing</Link></li>
-                            <li><Link href="/signup" className="block bg-[#E5383B] hover:bg-[#A4161A] text-white px-4 py-2 rounded transition-colors mt-2">Sign Up</Link></li>
+                            <li><Link href="/signup" className="block bg-[#E5383B] hover:bg-[#A4161A] text-white px-4 py-2 rounded transition-colors mt-2">Login/Signup</Link></li>
                         </ul>
                     </nav>
                 </div>
