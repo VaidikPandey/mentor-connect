@@ -52,13 +52,13 @@ export default function LoginPage() {
                             <TabsList className="grid w-full grid-cols-2 mb-8">
                                 <TabsTrigger
                                     value="mentor"
-                                    className={`text-lg font-semibold py-3 rounded-full transition-all duration-300 ${
+                                    className={`text-lg font-semibold py-3 rounded-full transition-all duration-300 mr-1 ${
                                         activeTab === 'mentor'
                                             ? 'bg-[#A4161A] text-white shadow-md'
                                             : 'bg-[#D3D3D3] text-[#0B090A]'
                                     } hover:bg-[#A4161A] hover:text-white hover:shadow-md`}
                                 >
-                                    Log In as Mentor
+                                I'm a Mentor
                                 </TabsTrigger>
                                 <TabsTrigger
                                     value="mentee"
@@ -68,7 +68,7 @@ export default function LoginPage() {
                                             : 'bg-[#D3D3D3] text-[#0B090A]'
                                     } hover:bg-[#A4161A] hover:text-white hover:shadow-md`}
                                 >
-                                    Log In as Mentee
+                                I'm a Mentor
                                 </TabsTrigger>
                             </TabsList>
                             <TabsContent value="mentor">
