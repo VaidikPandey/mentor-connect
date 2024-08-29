@@ -4,34 +4,34 @@ import React, { useState } from 'react'
 import { Input } from "@/components/ui/input"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import Link from "next/link"
-import { Search, Calendar, Clock, Users, Star, Briefcase, Facebook, Twitter, Instagram, Linkedin, Menu } from 'lucide-react'
+import { Search, Book, Clock, Users, Star, Briefcase, Facebook, Twitter, Instagram, Linkedin, Menu } from 'lucide-react'
 
-const seminars = [
-    { id: 1, title: "Introduction to Machine Learning", category: "Data Science", date: "2023-07-15", time: "14:00", duration: "2 hours", capacity: 50, enrolled: 32, rating: 4.8, level: "Beginner", instructor: "Dr. Alice Johnson", price: 2999, thumbnail: "/placeholder.svg?height=400&width=600" },
-    { id: 2, title: "Advanced React Patterns", category: "Web Development", date: "2023-07-18", time: "10:00", duration: "3 hours", capacity: 40, enrolled: 38, rating: 4.9, level: "Advanced", instructor: "Bob Smith", price: 3999, thumbnail: "/placeholder.svg?height=400&width=600" },
-    { id: 3, title: "Cybersecurity in the Modern Age", category: "Security", date: "2023-07-20", time: "15:00", duration: "2.5 hours", capacity: 45, enrolled: 20, rating: 4.7, level: "Intermediate", instructor: "Carol Williams", price: 3499, thumbnail: "/placeholder.svg?height=400&width=600" },
-    { id: 4, title: "Data Visualization with D3.js", category: "Data Science", date: "2023-07-22", time: "11:00", duration: "2 hours", capacity: 35, enrolled: 28, rating: 4.6, level: "Intermediate", instructor: "David Brown", price: 2799, thumbnail: "/placeholder.svg?height=400&width=600" },
-    { id: 5, title: "Cloud Architecture Best Practices", category: "Cloud Computing", date: "2023-07-25", time: "13:00", duration: "3 hours", capacity: 30, enrolled: 25, rating: 4.8, level: "Advanced", instructor: "Eva Davis", price: 4299, thumbnail: "/placeholder.svg?height=400&width=600" },
-    { id: 6, title: "UI/UX Design Principles", category: "Design", date: "2023-07-28", time: "09:00", duration: "4 hours", capacity: 55, enrolled: 40, rating: 4.5, level: "Beginner", instructor: "Frank Miller", price: 3299, thumbnail: "/placeholder.svg?height=400&width=600" },
-    { id: 7, title: "Blockchain Fundamentals", category: "Blockchain", date: "2023-08-01", time: "11:00", duration: "2.5 hours", capacity: 40, enrolled: 22, rating: 4.7, level: "Beginner", instructor: "George Wilson", price: 3799, thumbnail: "/placeholder.svg?height=400&width=600" },
-    { id: 8, title: "Advanced Python for Data Science", category: "Data Science", date: "2023-08-03", time: "14:00", duration: "3 hours", capacity: 35, enrolled: 30, rating: 4.9, level: "Advanced", instructor: "Hannah Brown", price: 4199, thumbnail: "/placeholder.svg?height=400&width=600" },
-    { id: 9, title: "Mobile App Development with Flutter", category: "Mobile Development", date: "2023-08-05", time: "10:00", duration: "4 hours", capacity: 45, enrolled: 35, rating: 4.6, level: "Intermediate", instructor: "Ian Taylor", price: 3699, thumbnail: "/placeholder.svg?height=400&width=600" },
+const courses = [
+    { id: 1, title: "Complete Machine Learning Bootcamp", category: "Data Science", duration: "12 weeks", lessons: 60, students: 1500, rating: 4.8, level: "Beginner to Advanced", instructor: "Dr. Alice Johnson", price: 9999, thumbnail: "/placeholder.svg?height=400&width=600" },
+    { id: 2, title: "Advanced React and Redux", category: "Web Development", duration: "8 weeks", lessons: 48, students: 1200, rating: 4.9, level: "Intermediate", instructor: "Bob Smith", price: 7999, thumbnail: "/placeholder.svg?height=400&width=600" },
+    { id: 3, title: "Cybersecurity Specialist Certification", category: "Security", duration: "16 weeks", lessons: 80, students: 800, rating: 4.7, level: "Advanced", instructor: "Carol Williams", price: 12999, thumbnail: "/placeholder.svg?height=400&width=600" },
+    { id: 4, title: "Data Visualization Mastery", category: "Data Science", duration: "6 weeks", lessons: 36, students: 950, rating: 4.6, level: "Intermediate", instructor: "David Brown", price: 5999, thumbnail: "/placeholder.svg?height=400&width=600" },
+    { id: 5, title: "Cloud Architecture and DevOps", category: "Cloud Computing", duration: "10 weeks", lessons: 55, students: 700, rating: 4.8, level: "Advanced", instructor: "Eva Davis", price: 11499, thumbnail: "/placeholder.svg?height=400&width=600" },
+    { id: 6, title: "UI/UX Design from Scratch", category: "Design", duration: "8 weeks", lessons: 40, students: 1800, rating: 4.5, level: "Beginner", instructor: "Frank Miller", price: 6999, thumbnail: "/placeholder.svg?height=400&width=600" },
+    { id: 7, title: "Blockchain Development", category: "Blockchain", duration: "14 weeks", lessons: 70, students: 600, rating: 4.7, level: "Intermediate to Advanced", instructor: "George Wilson", price: 13999, thumbnail: "/placeholder.svg?height=400&width=600" },
+    { id: 8, title: "Python for Data Science and AI", category: "Data Science", duration: "10 weeks", lessons: 50, students: 2000, rating: 4.9, level: "Beginner to Intermediate", instructor: "Hannah Brown", price: 8999, thumbnail: "/placeholder.svg?height=400&width=600" },
+    { id: 9, title: "Full-Stack Mobile App Development", category: "Mobile Development", duration: "16 weeks", lessons: 80, students: 1100, rating: 4.6, level: "Intermediate to Advanced", instructor: "Ian Taylor", price: 14999, thumbnail: "/placeholder.svg?height=400&width=600" },
 ]
 
-export default function SeminarsPage() {
+export default function CoursesPage() {
     const [searchTerm, setSearchTerm] = useState("")
     const [selectedCategory, setSelectedCategory] = useState("All")
     const [selectedLevel, setSelectedLevel] = useState("All")
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
 
-    const filteredSeminars = seminars.filter(seminar =>
-        (seminar.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-            seminar.category.toLowerCase().includes(searchTerm.toLowerCase())) &&
-        (selectedCategory === "All" || seminar.category === selectedCategory) &&
-        (selectedLevel === "All" || seminar.level === selectedLevel)
+    const filteredCourses = courses.filter(course =>
+        (course.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+            course.category.toLowerCase().includes(searchTerm.toLowerCase())) &&
+        (selectedCategory === "All" || course.category === selectedCategory) &&
+        (selectedLevel === "All" || course.level.includes(selectedLevel))
     )
 
-    const categories = ["All", ...Array.from(new Set(seminars.map(seminar => seminar.category)))]
+    const categories = ["All", ...Array.from(new Set(courses.map(course => course.category)))]
     const levels = ["All", "Beginner", "Intermediate", "Advanced"]
 
     return (
@@ -42,7 +42,7 @@ export default function SeminarsPage() {
                     <nav className="hidden md:block">
                         <ul className="flex space-x-6">
                             <li><Link href="/" className="hover:text-primary transition-colors">Home</Link></li>
-                            <li><Link href="/cources" className="hover:text-primary transition-colors">Courses</Link></li>
+                            <li><Link href="/seminars" className="hover:text-primary transition-colors">Seminars</Link></li>
                             <li><Link href="/pricing" className="hover:text-primary transition-colors">Pricing</Link></li>
                             <li><Link href="/signup" className="bg-[#E5383B] hover:bg-[#A4161A] text-white px-4 py-2 rounded transition-colors">Sign Up</Link></li>
                         </ul>
@@ -58,7 +58,7 @@ export default function SeminarsPage() {
                     <nav className="container mx-auto px-4">
                         <ul className="space-y-2">
                             <li><Link href="/" className="block hover:text-primary transition-colors">Home</Link></li>
-                            <li><Link href="/courses" className="block hover:text-primary transition-colors">Courses</Link></li>
+                            <li><Link href="/seminars" className="block hover:text-primary transition-colors">Seminars</Link></li>
                             <li><Link href="/pricing" className="block hover:text-primary transition-colors">Pricing</Link></li>
                             <li><Link href="/signup" className="block bg-[#E5383B] hover:bg-[#A4161A] text-white px-4 py-2 rounded transition-colors mt-2">Sign Up</Link></li>
                         </ul>
@@ -68,14 +68,14 @@ export default function SeminarsPage() {
 
             <main className="container mx-auto px-4 py-8 flex-grow">
                 <h1 className="text-3xl md:text-4xl font-bold mb-6 text-center text-primary">
-                    Connect with <span className="text-secondary">Expert Mentors</span>
+                    Explore Our <span className="text-secondary">Expert-Led Courses</span>
                 </h1>
 
                 <div className="mb-8 flex flex-col space-y-4">
                     <div className="w-full relative">
                         <Input
                             type="text"
-                            placeholder="Search seminars..."
+                            placeholder="Search courses..."
                             value={searchTerm}
                             onChange={(e) => setSearchTerm(e.target.value)}
                             className="w-full pl-10 pr-4 py-2 rounded-full border-2 border-primary focus:outline-none focus:border-secondary transition-colors duration-300"
@@ -107,43 +107,43 @@ export default function SeminarsPage() {
                 </div>
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                    {filteredSeminars.map(seminar => (
-                        <div key={seminar.id} className="card bg-base-100 shadow-xl hover:shadow-2xl transition-shadow duration-300 p-4">
+                    {filteredCourses.map(course => (
+                        <div key={course.id} className="card bg-base-100 shadow-xl hover:shadow-2xl transition-shadow duration-300 p-4">
                             <figure>
-                                <img src={seminar.thumbnail} alt={seminar.title} className="h-48 w-full object-cover rounded-t-lg" />
+                                <img src={course.thumbnail} alt={course.title} className="h-48 w-full object-cover rounded-t-lg" />
                             </figure>
                             <div className="card-body flex flex-col justify-between p-4">
                                 <div>
                                     <h2 className="card-title text-lg sm:text-xl mb-2">
-                                        {seminar.title}
+                                        {course.title}
                                     </h2>
-                                    <div className="badge badge-secondary mb-2">{seminar.category}</div>
+                                    <div className="badge badge-secondary mb-2">{course.category}</div>
                                     <div className="space-y-2 mt-2 text-sm">
                                         <p className="flex items-center">
-                                            <Calendar size={14} className="mr-2" />
-                                            {seminar.date}
+                                            <Clock size={14} className="mr-2" />
+                                            Duration: {course.duration}
                                         </p>
                                         <p className="flex items-center">
-                                            <Clock size={14} className="mr-2" />
-                                            {seminar.time} - {seminar.duration}
+                                            <Book size={14} className="mr-2" />
+                                            {course.lessons} lessons
                                         </p>
                                         <p className="flex items-center">
                                             <Users size={14} className="mr-2" />
-                                            {seminar.enrolled}/{seminar.capacity} enrolled
+                                            {course.students} students enrolled
                                         </p>
                                         <p className="flex items-center">
                                             <Star size={14} className="mr-2" />
-                                            {seminar.rating} ({seminar.level})
+                                            {course.rating} ({course.level})
                                         </p>
                                         <p className="flex items-center">
                                             <Briefcase size={14} className="mr-2" />
-                                            Instructor: {seminar.instructor}
+                                            Instructor: {course.instructor}
                                         </p>
                                     </div>
                                 </div>
                                 <div className="flex justify-between items-center mt-4">
-                                    <span className="text-lg font-bold">₹{seminar.price}</span>
-                                    <Link href={`/seminars/${seminar.id}`} className="btn btn-primary bg-red-500 text-white hover:bg-red-600 rounded-lg px-4 py-2 transition-colors text-sm">
+                                    <span className="text-lg font-bold">₹{course.price}</span>
+                                    <Link href={`/courses/${course.id}`} className="btn btn-primary bg-red-500 text-white hover:bg-red-600 rounded-lg px-4 py-2 transition-colors text-sm">
                                         Enroll Now
                                     </Link>
                                 </div>

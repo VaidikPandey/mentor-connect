@@ -137,7 +137,7 @@ export default function HomePage() {
                             <li><Link href="#" className="hover:text-primary transition-colors">Find a Mentor</Link></li>
                             <li><Link href="/signup" className="hover:text-primary transition-colors">Become a Mentor</Link></li>
                             <li><Link href="/seminars" className="hover:text-primary transition-colors">Seminars</Link></li>
-                            <li><Link href="#" className="hover:text-primary transition-colors">Courses</Link></li>
+                            <li><Link href="/cources" className="hover:text-primary transition-colors">Courses</Link></li>
                             <li><Link href="#" className="hover:text-primary transition-colors">Pricing</Link></li>
                         </ul>
                     </nav>
