@@ -4,7 +4,7 @@ import React, { useState } from 'react'
 import { Input } from "@/components/ui/input"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import Link from "next/link"
-import { Search, Calendar, Clock, Users, Star, Briefcase, Facebook, Twitter, Instagram, Linkedin } from 'lucide-react'
+import { Search, Calendar, Clock, Users, Star, Briefcase, Facebook, Twitter, Instagram, Linkedin, Menu } from 'lucide-react'
 
 const seminars = [
     { id: 1, title: "Introduction to Machine Learning", category: "Data Science", date: "2023-07-15", time: "14:00", duration: "2 hours", capacity: 50, enrolled: 32, rating: 4.8, level: "Beginner", instructor: "Dr. Alice Johnson", price: 2999, thumbnail: "/placeholder.svg?height=400&width=600" },
@@ -22,6 +22,7 @@ export default function SeminarsPage() {
     const [searchTerm, setSearchTerm] = useState("")
     const [selectedCategory, setSelectedCategory] = useState("All")
     const [selectedLevel, setSelectedLevel] = useState("All")
+    const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
 
     const filteredSeminars = seminars.filter(seminar =>
         (seminar.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -38,7 +39,7 @@ export default function SeminarsPage() {
             <header className="bg-[#0B090A] text-white py-4">
                 <div className="container mx-auto px-4 flex justify-between items-center">
                     <h1 className="text-2xl font-bold">MentorConnect</h1>
-                    <nav>
+                    <nav className="hidden md:block">
                         <ul className="flex space-x-6">
                             <li><Link href="/" className="hover:text-primary transition-colors">Home</Link></li>
                             <li><Link href="/courses" className="hover:text-primary transition-colors">Courses</Link></li>
@@ -46,16 +47,32 @@ export default function SeminarsPage() {
                             <li><Link href="/signup" className="bg-[#E5383B] hover:bg-[#A4161A] text-white px-4 py-2 rounded transition-colors">Sign Up</Link></li>
                         </ul>
                     </nav>
+                    <button className="md:hidden text-white" onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}>
+                        <Menu size={24} />
+                    </button>
                 </div>
             </header>
 
+            {isMobileMenuOpen && (
+                <div className="md:hidden bg-[#0B090A] text-white py-4">
+                    <nav className="container mx-auto px-4">
+                        <ul className="space-y-2">
+                            <li><Link href="/" className="block hover:text-primary transition-colors">Home</Link></li>
+                            <li><Link href="/courses" className="block hover:text-primary transition-colors">Courses</Link></li>
+                            <li><Link href="/pricing" className="block hover:text-primary transition-colors">Pricing</Link></li>
+                            <li><Link href="/signup" className="block bg-[#E5383B] hover:bg-[#A4161A] text-white px-4 py-2 rounded transition-colors mt-2">Sign Up</Link></li>
+                        </ul>
+                    </nav>
+                </div>
+            )}
+
             <main className="container mx-auto px-4 py-8 flex-grow">
-                <h1 className="text-4xl font-bold mb-6 text-center text-primary">
+                <h1 className="text-3xl md:text-4xl font-bold mb-6 text-center text-primary">
                     Connect with <span className="text-secondary">Expert Mentors</span>
                 </h1>
 
-                <div className="mb-8 flex flex-col md:flex-row items-center space-y-4 md:space-y-0 md:space-x-4">
-                    <div className="w-full md:w-1/2 relative">
+                <div className="mb-8 flex flex-col space-y-4">
+                    <div className="w-full relative">
                         <Input
                             type="text"
                             placeholder="Search seminars..."
@@ -65,65 +82,68 @@ export default function SeminarsPage() {
                         />
                         <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-primary" size={20} />
                     </div>
-                    <Select value={selectedCategory} onValueChange={setSelectedCategory}>
-                        <SelectTrigger className="w-full md:w-auto">
-                            <SelectValue placeholder="Category" />
-                        </SelectTrigger>
-                        <SelectContent>
-                            {categories.map(category => (
-                                <SelectItem key={category} value={category}>{category}</SelectItem>
-                            ))}
-                        </SelectContent>
-                    </Select>
-                    <Select value={selectedLevel} onValueChange={setSelectedLevel}>
-                        <SelectTrigger className="w-full md:w-auto">
-                            <SelectValue placeholder="Level" />
-                        </SelectTrigger>
-                        <SelectContent>
-                            {levels.map(level => (
-                                <SelectItem key={level} value={level}>{level}</SelectItem>
-                            ))}
-                        </SelectContent>
-                    </Select>
+                    <div className="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
+                        <Select value={selectedCategory} onValueChange={setSelectedCategory}>
+                            <SelectTrigger className="w-full sm:w-1/2">
+                                <SelectValue placeholder="Category" />
+                            </SelectTrigger>
+                            <SelectContent>
+                                {categories.map(category => (
+                                    <SelectItem key={category} value={category}>{category}</SelectItem>
+                                ))}
+                            </SelectContent>
+                        </Select>
+                        <Select value={selectedLevel} onValueChange={setSelectedLevel}>
+                            <SelectTrigger className="w-full sm:w-1/2">
+                                <SelectValue placeholder="Level" />
+                            </SelectTrigger>
+                            <SelectContent>
+                                {levels.map(level => (
+                                    <SelectItem key={level} value={level}>{level}</SelectItem>
+                                ))}
+                            </SelectContent>
+                        </Select>
+                    </div>
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                     {filteredSeminars.map(seminar => (
                         <div key={seminar.id} className="card bg-base-100 shadow-xl hover:shadow-2xl transition-shadow duration-300 p-4">
                             <figure>
-                                <img src={seminar.thumbnail} alt={seminar.title} className="h-48 w-full object-cover" />
+                                <img src={seminar.thumbnail} alt={seminar.title} className="h-48 w-full object-cover rounded-t-lg" />
                             </figure>
                             <div className="card-body flex flex-col justify-between p-4">
                                 <div>
-                                    <h2 className="card-title">
+                                    <h2 className="card-title text-lg sm:text-xl mb-2">
                                         {seminar.title}
-                                        <div className="badge badge-secondary">{seminar.category}</div>
                                     </h2>
-                                    <div className="space-y-2 mt-2">
+                                    <div className="badge badge-secondary mb-2">{seminar.category}</div>
+                                    <div className="space-y-2 mt-2 text-sm">
                                         <p className="flex items-center">
-                                            <Calendar size={16} className="mr-2" />
+                                            <Calendar size={14} className="mr-2" />
                                             {seminar.date}
                                         </p>
                                         <p className="flex items-center">
-                                            <Clock size={16} className="mr-2" />
+                                            <Clock size={14} className="mr-2" />
                                             {seminar.time} - {seminar.duration}
                                         </p>
                                         <p className="flex items-center">
-                                            <Users size={16} className="mr-2" />
+                                            <Users size={14} className="mr-2" />
                                             {seminar.enrolled}/{seminar.capacity} enrolled
                                         </p>
                                         <p className="flex items-center">
-                                            <Star size={16} className="mr-2" />
+                                            <Star size={14} className="mr-2" />
                                             {seminar.rating} ({seminar.level})
                                         </p>
                                         <p className="flex items-center">
-                                            <Briefcase size={16} className="mr-2" />
+                                            <Briefcase size={14} className="mr-2" />
                                             Instructor: {seminar.instructor}
                                         </p>
                                     </div>
                                 </div>
-                                <div className="flex justify-end mt-4">
-                                    <Link href={`/seminars/${seminar.id}`} className="btn btn-primary bg-red-500 text-white hover:bg-red-600 rounded-lg px-4 py-2 transition-colors">
+                                <div className="flex justify-between items-center mt-4">
+                                    <span className="text-lg font-bold">₹{seminar.price}</span>
+                                    <Link href={`/seminars/${seminar.id}`} className="btn btn-primary bg-red-500 text-white hover:bg-red-600 rounded-lg px-4 py-2 transition-colors text-sm">
                                         Enroll Now
                                     </Link>
                                 </div>
@@ -135,7 +155,7 @@ export default function SeminarsPage() {
 
             <footer className="bg-[#0B090A] text-white py-8">
                 <div className="container mx-auto px-4">
-                    <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
                         <div>
                             <h3 className="text-xl font-bold mb-4">MentorConnect</h3>
                             <p className="text-sm">Connecting mentors and learners for a brighter future.</p>
