@@ -1,4 +1,6 @@
-import React, { useState } from 'react'
+'use client'
+
+import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import { Input } from "@/components/ui/input"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
@@ -24,7 +26,7 @@ interface Course {
     isPaid: boolean;
     videos: Video[];
     pdfs: string[];
-    mentorId: string;
+    mentorId: string; // Adjust according to your ObjectId type
     createdAt?: Date;
     updatedAt?: Date;
     category: string;
@@ -37,14 +39,20 @@ interface Course {
     thumbnail: string;
 }
 
-interface CoursesPageProps {
-    courses: Course[];
-}
 
-export default function CoursesPage({ courses }: CoursesPageProps) {
+export default function CoursesPage() {
     const [searchTerm, setSearchTerm] = useState("")
     const [selectedCategory, setSelectedCategory] = useState("All")
     const [selectedLevel, setSelectedLevel] = useState("All")
+    const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
+    const [courses, setCourses] = useState<Course[]>([])
+
+    useEffect(() => {
+        // Fetch courses from the backend
+        axios.get('/api/courses')
+            .then(response => setCourses(response.data))
+            .catch(error => console.error('Error fetching courses:', error))
+    }, [])
 
     const filteredCourses = courses.filter(course =>
         (course.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -162,21 +170,4 @@ export default function CoursesPage({ courses }: CoursesPageProps) {
             <Footer />
         </div>
     )
-}
-
-// Fetching data server-side
-export async function getServerSideProps() {
-    try {
-        const response = await axios.get('http://localhost:3000/api/courses') // Adjust URL if needed
-        const courses = response.data
-
-        return {
-            props: { courses }
-        }
-    } catch (error) {
-        console.error('Error fetching courses:', error)
-        return {
-            props: { courses: [] }
-        }
-    }
 }
