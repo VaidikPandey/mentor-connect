@@ -1,30 +1,58 @@
 'use client'
 
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
+import axios from 'axios'
 import { Input } from "@/components/ui/input"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import Link from "next/link"
-import { Search, Book, Clock, Users, Star, Briefcase, Facebook, Twitter, Instagram, Linkedin, Menu } from 'lucide-react'
+import { Search, Book, Clock, Users, Star, Briefcase } from 'lucide-react'
 import Header from '@/components/Header'
 import Footer from '@/components/Footer'
 
-const courses = [
-    { id: 1, title: "Complete Machine Learning Bootcamp", category: "Data Science", duration: "12 weeks", lessons: 60, students: 1500, rating: 4.8, level: "Beginner to Advanced", instructor: "Dr. Alice Johnson", price: 9999, thumbnail: "https://img.freepik.com/free-vector/flat-design-people-business-training-illustrated_23-2148913909.jpg?size=626&ext=jpg" },
-    { id: 2, title: "Advanced React and Redux", category: "Web Development", duration: "8 weeks", lessons: 48, students: 1200, rating: 4.9, level: "Intermediate", instructor: "Bob Smith", price: 7999, thumbnail: "https://img.freepik.com/free-vector/flat-design-people-business-training-illustrated_23-2148913909.jpg?size=626&ext=jpg" },
-    { id: 3, title: "Cybersecurity Specialist Certification", category: "Security", duration: "16 weeks", lessons: 80, students: 800, rating: 4.7, level: "Advanced", instructor: "Carol Williams", price: 12999, thumbnail: "https://img.freepik.com/free-vector/flat-design-people-business-training-illustrated_23-2148913909.jpg?size=626&ext=jpg" },
-    { id: 4, title: "Data Visualization Mastery", category: "Data Science", duration: "6 weeks", lessons: 36, students: 950, rating: 4.6, level: "Intermediate", instructor: "David Brown", price: 5999, thumbnail: "https://img.freepik.com/free-vector/flat-design-people-business-training-illustrated_23-2148913909.jpg?size=626&ext=jpg" },
-    { id: 5, title: "Cloud Architecture and DevOps", category: "Cloud Computing", duration: "10 weeks", lessons: 55, students: 700, rating: 4.8, level: "Advanced", instructor: "Eva Davis", price: 11499, thumbnail: "https://img.freepik.com/free-vector/flat-design-people-business-training-illustrated_23-2148913909.jpg?size=626&ext=jpg" },
-    { id: 6, title: "UI/UX Design from Scratch", category: "Design", duration: "8 weeks", lessons: 40, students: 1800, rating: 4.5, level: "Beginner", instructor: "Frank Miller", price: 6999, thumbnail: "https://img.freepik.com/free-vector/flat-design-people-business-training-illustrated_23-2148913909.jpg?size=626&ext=jpg" },
-    { id: 7, title: "Blockchain Development", category: "Blockchain", duration: "14 weeks", lessons: 70, students: 600, rating: 4.7, level: "Intermediate to Advanced", instructor: "George Wilson", price: 13999, thumbnail: "https://img.freepik.com/free-vector/flat-design-people-business-training-illustrated_23-2148913909.jpg?size=626&ext=jpg" },
-    { id: 8, title: "Python for Data Science and AI", category: "Data Science", duration: "10 weeks", lessons: 50, students: 2000, rating: 4.9, level: "Beginner to Intermediate", instructor: "Hannah Brown", price: 8999, thumbnail: "https://img.freepik.com/free-vector/flat-design-people-business-training-illustrated_23-2148913909.jpg?size=626&ext=jpg" },
-    { id: 9, title: "Full-Stack Mobile App Development", category: "Mobile Development", duration: "16 weeks", lessons: 80, students: 1100, rating: 4.6, level: "Intermediate to Advanced", instructor: "Ian Taylor", price: 14999, thumbnail: "https://img.freepik.com/free-vector/flat-design-people-business-training-illustrated_23-2148913909.jpg?size=626&ext=jpg" },
-]
+interface Video {
+    title: string;
+    description?: string;
+    url: string;
+}
+
+interface Course {
+    id: number;
+    title: string;
+    description: string;
+    price: number;
+    isPaid: boolean;
+    videos: Video[];
+    pdfs: string[];
+    mentorId: string; // Adjust according to your ObjectId type
+    createdAt?: Date;
+    updatedAt?: Date;
+    category: string;
+    duration: string;
+    lessons: number;
+    students: number;
+    rating: number;
+    level: string;
+    instructor: string;
+    thumbnail: string;
+}
+
+
+const categories = ["All", "Data Science", "Web Development", "Security", "Cloud Computing", "Design", "Blockchain", "Mobile Development"];
+const levels = ["All", "Beginner", "Intermediate", "Advanced"];
 
 export default function CoursesPage() {
     const [searchTerm, setSearchTerm] = useState("")
     const [selectedCategory, setSelectedCategory] = useState("All")
     const [selectedLevel, setSelectedLevel] = useState("All")
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
+    const [courses, setCourses] = useState<Course[]>([])
+
+    useEffect(() => {
+        // Fetch courses from the backend
+        axios.get('/api/courses')
+            .then(response => setCourses(response.data))
+            .catch(error => console.error('Error fetching courses:', error))
+    }, [])
 
     const filteredCourses = courses.filter(course =>
         (course.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -32,9 +60,6 @@ export default function CoursesPage() {
         (selectedCategory === "All" || course.category === selectedCategory) &&
         (selectedLevel === "All" || course.level.includes(selectedLevel))
     )
-
-    const categories = ["All", ...Array.from(new Set(courses.map(course => course.category)))]
-    const levels = ["All", "Beginner", "Intermediate", "Advanced"]
 
     return (
         <div className="min-h-screen flex flex-col bg-gradient-to-b from-base-200 to-base-300 text-base-content">
@@ -114,6 +139,19 @@ export default function CoursesPage() {
                                         <p className="flex items-center">
                                             <Briefcase size={14} className="mr-2" />
                                             Instructor: {course.instructor}
+                                        </p>
+                                        {/* New fields */}
+                                        <p className="flex items-center">
+                                            <Briefcase size={14} className="mr-2" />
+                                            Description: {course.description}
+                                        </p>
+                                        <p className="flex items-center">
+                                            <Briefcase size={14} className="mr-2" />
+                                            Price: ₹{course.price}
+                                        </p>
+                                        <p className="flex items-center">
+                                            <Briefcase size={14} className="mr-2" />
+                                            Is Paid: {course.isPaid ? "Yes" : "No"}
                                         </p>
                                     </div>
                                 </div>
