@@ -93,7 +93,7 @@ export default function LoginPage() {
                                 </form>
                                 <p className="mt-6 text-center text-sm text-[#660708]">
                                     Don't have an account?{" "}
-                                    <Link href="#" className="font-medium text-[#E5383B] hover:underline transition-colors duration-300">
+                                    <Link href="signup" className="font-medium text-[#E5383B] hover:underline transition-colors duration-300">
                                         Sign up
                                     </Link>
                                 </p>
@@ -120,7 +120,7 @@ export default function LoginPage() {
                                 </form>
                                 <p className="mt-6 text-center text-sm text-[#660708]">
                                     Don't have an account?{" "}
-                                    <Link href="#" className="font-medium text-[#E5383B] hover:underline transition-colors duration-300">
+                                    <Link href="/signup" className="font-medium text-[#E5383B] hover:underline transition-colors duration-300">
                                         Sign up
                                     </Link>
                                 </p>
