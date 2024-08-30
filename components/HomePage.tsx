@@ -1,176 +1,220 @@
 "use client"
 import React, { useState, useEffect, useCallback } from 'react'
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Card, CardContent } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
-import { ArrowRight, Search, Star } from 'lucide-react'
-import Image from 'next/image'
-import Link from 'next/link'
 import Header from '@/components/Header'
 import Footer from '@/components/Footer'
 
-interface Mentor {
+
+const reviews = [
+    {
+        id: 1,
+        text: "Great experience! Highly recommend.",
+        user: "Jane Doe",
+    },
+    {
+        id: 2,
+        text: "Exceptional service and support.",
+        user: "John Smith",
+    },
+    {
+        id: 3,
+        text: "Quick and reliable, will use again!",
+        user: "Alice Johnson",
+    },
+    {
+        id: 4,
+        text: "Absolutely amazing! Exceeded my expectations.",
+        user: "Michael Lee",
+    },
+];
+
+type Mentor = {
+    id: number;
     name: string;
-    expertise: string;
-    rating: number;
-    skills: string[];
     image: string;
-}
+    description: string;
+};
 
-const mentors: Mentor[] = [
-    { name: "Alice Johnson", expertise: "Full-Stack Development", rating: 4.9, skills: ["React", "Node.js", "Python"], image: "/placeholder.svg?height=400&width=400" },
-    { name: "Bob Smith", expertise: "UI/UX Design", rating: 4.8, skills: ["Figma", "Adobe XD", "Sketch"], image: "/placeholder.svg?height=400&width=400" },
-    { name: "Carol Williams", expertise: "Data Science", rating: 4.7, skills: ["Python", "R", "Machine Learning"], image: "/placeholder.svg?height=400&width=400" },
-    { name: "David Brown", expertise: "Machine Learning", rating: 4.9, skills: ["TensorFlow", "PyTorch", "Scikit-learn"], image: "/placeholder.svg?height=400&width=400" },
-    { name: "Eva Davis", expertise: "Product Management", rating: 4.8, skills: ["Agile", "Scrum", "User Stories"], image: "/placeholder.svg?height=400&width=400" },
-]
+type HomePageProps = {
+    mentors: Mentor[];
+};
 
-const testimonials = [
-    { text: "MentorConnect has been a game-changer for my career. The guidance I've received is invaluable.", name: "John Doe", role: "Software Engineer" },
-    { text: "I've grown so much as a designer thanks to my mentor from MentorConnect. Highly recommended!", name: "Jane Smith", role: "UX Designer" },
-    { text: "The personalized advice I got helped me land my dream job. Thank you, MentorConnect!", name: "Mike Johnson", role: "Data Analyst" },
-    { text: "As someone switching careers, MentorConnect provided the support I needed to make a successful transition.", name: "Sarah Lee", role: "Product Manager" },
-    { text: "The mentors here are truly world-class. I've learned more in months than I did in years on my own.", name: "Chris Taylor", role: "Full-Stack Developer" },
-]
 
-const platformFeatures = [
-    { title: "Expert Mentors", description: "Connect with industry leaders who have proven track records in their fields." },
-    { title: "Personalized Guidance", description: "Receive tailored advice and support to accelerate your career growth." },
-    { title: "Flexible Scheduling", description: "Book sessions that fit your busy lifestyle, with options for both short-term and long-term mentorship." },
-    { title: "Diverse Expertise", description: "Find mentors across various industries and specializations, from tech to creative fields." },
-    { title: "Community Support", description: "Join a network of like-minded professionals and expand your connections." },
-]
 
-interface MentorCardProps {
-    mentor: Mentor;
-}
-
-const MentorCard: React.FC<MentorCardProps> = React.memo(({ mentor }) => (
-    <Card className="h-full">
-        <CardContent className="p-6 flex flex-col justify-between h-full">
-            <div>
-                <div className="flex items-center mb-4">
-                    <Image src={mentor.image} alt={mentor.name} width={64} height={64} className="rounded-full mr-4" />
-                    <div>
-                        <h4 className="font-bold text-lg">{mentor.name}</h4>
-                        <p className="text-sm text-[#660708]">{mentor.expertise}</p>
-                    </div>
-                </div>
-                <div className="flex items-center mb-4">
-                    <Star className="h-5 w-5 text-[#E5383B] mr-1" />
-                    <span className="font-semibold">{mentor.rating}</span>
-                </div>
-                <div className="flex flex-wrap gap-2 mb-4">
-                    {mentor.skills.map((skill, skillIndex) => (
-                        <Badge key={skillIndex} variant="secondary" className="bg-[#D3D3D3] text-[#0B090A]">
-                            {skill}
-                        </Badge>
-                    ))}
-                </div>
-            </div>
-            <Button className="w-full mt-4 bg-primary hover:bg-primary-hover text-white transition-colors">
-                View Profile
-            </Button>
-        </CardContent>
-    </Card>
-))
-
-MentorCard.displayName = 'MentorCard'
-
-export default function HomePage() {
-    const [activeMentor, setActiveMentor] = useState(0)
-    const [activeTestimonial, setActiveTestimonial] = useState(0)
-
-    const nextMentor = useCallback(() => {
-        setActiveMentor((prev) => (prev + 1) % mentors.length)
-    }, [])
-
-    const nextTestimonial = useCallback(() => {
-        setActiveTestimonial((prev) => (prev + 1) % testimonials.length)
-    }, [])
-
-    useEffect(() => {
-        const mentorInterval = setInterval(nextMentor, 5000)
-        const testimonialInterval = setInterval(nextTestimonial, 8000)
-        return () => {
-            clearInterval(mentorInterval)
-            clearInterval(testimonialInterval)
-        }
-    }, [nextMentor, nextTestimonial])
-
+const HomePage: React.FC<HomePageProps> = ({ mentors = [] }) => {
     return (
         <div className="min-h-screen bg-background-light text-text-primary">
             <Header />
 
-            <main className="container mx-auto mt-12 px-4">
-                <section className="text-center mb-16">
-                    <h2 className="text-4xl md:text-5xl font-bold mb-4 text-[#0B090A]">Find Your Perfect Mentor</h2>
-                    <p className="text-lg md:text-xl mb-8 text-[#161A1D]">Accelerate your career with personalized guidance from industry experts</p>
-                    <div className="flex flex-col md:flex-row justify-center items-center">
-                        <div className="relative w-full md:w-2/3 mb-4 md:mb-0">
-                            <Input className="w-full pl-10 pr-4 py-3 rounded-full" placeholder="Search for mentors, skills, or industries" />
-                            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
-                        </div>
-                        <Button className="bg-primary hover:bg-primary-hover text-white md:ml-2 rounded-full transition-colors w-full md:w-auto">
-                            Search
-                        </Button>
-                    </div>
-                </section>
+            {/* Banner Section */}
+            <div
+                className="relative bg-cover shadow-2xl bg-center h-[40rem]"
+                style={{ backgroundImage: 'url(/m2.jpg)' }}
+            >
+                <div className="absolute bottom-20 left-1/2 transform -translate-x-1/2">
+                    <button className="btn bg-gray-800 text-white px-8 py-3 rounded-full shadow-lg hover:bg-black hover:shadow-black">
+                        Get Started
+                    </button>
+                </div>
+            </div>
 
-                <section className="mb-16 flex flex-col md:flex-row items-start justify-between">
-                    <div className="w-full md:w-1/2 mb-8 md:mb-0">
-                        <h3 className="text-3xl font-bold mb-6 text-[#0B090A]">Featured Mentors</h3>
-                        <div className="relative h-[400px] w-full max-w-[400px] mx-auto">
-                            {mentors.map((mentor, index) => (
-                                <div
-                                    key={index}
-                                    className={`absolute top-0 left-0 w-full h-full transition-opacity duration-500 ${index === activeMentor ? 'opacity-100 z-10' : 'opacity-0 z-0'
-                                        }`}
-                                >
-                                    <MentorCard mentor={mentor} />
+            {/* Meet Our Mentors Heading */}
+            <div className="text-center mt-12 mb-7">
+                <div className="flex items-center justify-center">
+                    <div className="h-px w-24 bg-gradient-to-r from-transparent to-gray-400"></div>
+                    <h2 className="text-4xl font-bold text-gray-800 mx-4">Meet Our Mentors</h2>
+                    <div className="h-px w-24 bg-gradient-to-l from-transparent to-gray-400"></div>
+                </div>
+            </div>
+
+            {/* Dynamic Carousel of Cards */}
+            <div className="carousel carousel-center rounded-box gap-4 p-4 w-full">
+                {mentors.map((mentor) => (
+                    <div key={mentor.id} className="carousel-item w-72 h-96">
+                        <div className="card bg-base-100 shadow-xl hover:scale-105 transform transition-transform duration-300">
+                            <figure className="px-4 pt-6">
+                                <img
+                                    src={mentor.image}
+                                    alt={mentor.name}
+                                    className="rounded-xl h-fit w-fit shadow-green-100"
+                                />
+                            </figure>
+                            <div className="card-body items-center text-center">
+                                <h2 className="card-title text-black">{mentor.name}</h2>
+                                <p className="text-gray-600">{mentor.description}</p>
+                                <div className="card-actions">
+                                    <button className="btn bg-slate-500 text-white hover:bg-black hover:shadow-black">Visit Now</button>
                                 </div>
-                            ))}
+                            </div>
                         </div>
                     </div>
-                    <div className="w-full md:w-1/2 pl-0 md:pl-8">
-                        <h3 className="text-3xl font-bold mb-6 text-[#0B090A]">Why Choose MentorConnect?</h3>
-                        <ul className="space-y-4">
-                            {platformFeatures.map((feature, index) => (
-                                <li key={index} className="flex items-start">
-                                    <ArrowRight className="h-6 w-6 text-[#A4161A] mr-2 flex-shrink-0" />
-                                    <p><strong>{feature.title}:</strong> {feature.description}</p>
-                                </li>
-                            ))}
-                        </ul>
-                        <Button className="mt-6 bg-primary hover:bg-primary-hover text-white transition-colors w-full md:w-auto">
-                            Learn More About Our Platform
-                        </Button>
-                    </div>
-                </section>
-            </main>
+                ))}
+            </div>
 
-            <section className="bg-[#161A1D] text-white py-16">
-                <div className="container mx-auto">
-                    <h3 className="text-3xl font-bold mb-8 text-center">What Our Users Say</h3>
-                    <div className="relative max-w-2xl mx-auto">
-                        <Card className="bg-[#0B090A] text-white">
-                            <CardContent className="p-8">
-                                <p className="text-lg mb-6 italic">"{testimonials[activeTestimonial].text}"</p>
-                                <div className="flex items-center">
-                                    <div className="w-12 h-12 bg-[#B1A7A6] rounded-full mr-4"></div>
-                                    <div>
-                                        <h5 className="font-bold">{testimonials[activeTestimonial].name}</h5>
-                                        <p className="text-sm text-[#D3D3D3]">{testimonials[activeTestimonial].role}</p>
-                                    </div>
-                                </div>
-                            </CardContent>
-                        </Card>
+            <div className="flex mt-10 m-3 items-center justify-between bg-gradient-to-r from-blue-500 to-violet-600 h-72 shadow-lg rounded-lg p-6">
+                <div className="flex-1">
+                    <h2 className="text-4xl font-bold text-white leading-snug">
+                        Empowering Growth Through Engaging Seminars
+                    </h2>
+                    <p className="text-lg text-white mt-4">
+                        Join us for expert-led sessions that will enhance your knowledge and skills.
+                    </p>
+                </div>
+                <div className="flex-shrink-0 w-1/3 h-full">
+                    <img
+                        src="/m4.jpg"
+                        alt="Seminar"
+                        className="h-full w-full object-cover rounded-lg shadow-lg"
+                    />
+                </div>
+            </div>
+
+            <div className="flex mt-10 m-3 items-center justify-between bg-gradient-to-r from-purple-600 to-blue-300 h-72 shadow-lg rounded-lg p-6">
+                <div className="flex-shrink-0 w-1/3 h-full">
+                    <img
+                        src="/M3.jpeg"
+                        alt="Mentor Blog"
+                        className="h-full w-full object-cover rounded-lg shadow-lg"
+                    />
+                </div>
+                <div className="flex-1 ml-6">
+                    <h2 className="text-4xl font-bold text-white leading-snug">
+                        Learn from Experience: Mentor Blogs
+                    </h2>
+                    <p className="text-lg text-white mt-4">
+                        Dive into insightful articles written by industry experts, sharing their journey and achievements.
+                    </p>
+                </div>
+            </div>
+
+            <div className="flex mt-10 m-3 items-center justify-between bg-gradient-to-r from-purple-500 to-pink-600 h-72 shadow-lg rounded-lg p-6">
+                <div className="flex-1">
+                    <h2 className="text-4xl font-bold text-white leading-snug">
+                        Personalized One-on-One Consultancy
+                    </h2>
+                    <p className="text-lg text-white mt-4">
+                        Get tailored advice and guidance through direct interaction with experienced mentors.
+                    </p>
+                </div>
+                <div className="flex-shrink-0 w-1/3 h-full">
+                    <img
+                        src="/ono.jpeg"
+                        alt="Consultancy"
+                        className="h-full w-full object-cover rounded-lg shadow-lg"
+                    />
+                </div>
+            </div>
+
+            <div className="min-h-screen bg-base-100 py-10">
+                {/* Heading */}
+                <div className="text-center mt-12 mb-7">
+                    <div className="flex items-center justify-center">
+                        <div className="h-px w-24 bg-gradient-to-r from-transparent to-gray-400"></div>
+                        <h2 className="text-4xl font-bold text-gray-800 mx-4"> Why Mentor connect?</h2>
+                        <div className="h-px w-24 bg-gradient-to-l from-transparent to-gray-400"></div>
                     </div>
                 </div>
-            </section>
+
+                {/* Cards Section */}
+                <div className="flex flex-row items-center justify-center align-bottom gap-6">
+                    {/* Left Card */}
+                    <div className='card w-28 h-28 bg-slate-100 shadow-xl hover:scale-105 transform transition-transform duration-300'></div>
+                    <div className="card w-80 h-96 bg-slate-100 shadow-xl hover:scale-105 transform transition-transform duration-300">
+                        <div className="card-body text-center">
+                            <h3 className="card-title text-xl font-bold text-black">Personalized Mentorship</h3>
+                            <p className="text-gray-600 mt-10">Get one-on-one guidance tailored to your needs.<br /> <br /> Benefit from dedicated time to address your unique needs and goals.<br /><br /> Set and achieve specific objectives with mentor support.</p>
+                        </div>
+                    </div>
+
+                    {/* Middle Card */}
+                    <div className="card w-80 h-[35rem] bg-slate-100 shadow-xl hover:scale-105 transform transition-transform duration-300">
+                        <div className="card-body text-center">
+                            <h3 className="card-title text-2xl text-black justify-center font-bold">Expert Advice</h3>
+                            <p className="text-gray-600 mt-10">Learn from industry professionals with years of experience. <br /><br />Stay ahead of trends with guidance on the latest industry practices. <br /><br /> Get tailored solutions to specific challenges you face in your career or projects. <br /><br /> Develop long-term strategies with insights from seasoned professionals.</p>
+                        </div>
+                    </div>
+
+                    {/* Right Card */}
+                    <div className="card w-80 h-96 bg-slate-100 shadow-xl hover:scale-105 transform transition-transform duration-300">
+                        <div className="card-body text-center">
+                            <h3 className="card-title text-black justify-center text-xl font-bold">Career Growth</h3>
+                            <p className="text-gray-600 mt-10">Advance your career with targeted advice and support.<br /><br />Expand your professional network through mentor connections.<br /><br />Leverage mentor connections to find job openings and career opportunities.</p>
+                        </div>
+                    </div>
+
+                    <div className='card w-28 h-28 bg-slate-100 hover:scale-105 transform transition-transform duration-300 shadow-xl'></div>
+                </div>
+            </div>
+
+            <div className="text-center mt-12 mb-7">
+                <div className="flex items-center justify-center">
+                    <div className="h-px w-24 bg-gradient-to-r from-transparent to-gray-400"></div>
+                    <h2 className="text-4xl font-bold text-gray-800 mx-4">hear from our mentees</h2>
+                    <div className="h-px w-24 bg-gradient-to-l from-transparent to-gray-400"></div>
+                </div>
+            </div>
+
+            <div className="bg-gray-900 text-white py-10">
+                <div className="carousel w-full max-w-full mx-auto flex flex-wrap justify-center">
+                    {reviews.map((review, index) => (
+                        <div
+                            id={`item${index + 1}`}
+                            key={review.id}
+                            className="carousel-item w-full md:w-1/2 lg:w-1/3 p-4 flex justify-center"
+                        >
+                            <div className="card w-full bg-base-100 shadow-xl">
+                                <div className="card-body p-6">
+                                    <p className="text-gray-700 text-lg italic">"{review.text}"</p>
+                                    <h2 className="card-title mt-4 text-gray-800">- {review.user}</h2>
+                                </div>
+                            </div>
+                        </div>
+                    ))}
+                </div>
+            </div>
 
             <Footer />
         </div>
-    )
-}
+    );
+};
+
+export default HomePage;
