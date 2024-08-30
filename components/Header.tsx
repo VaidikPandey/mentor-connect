@@ -36,9 +36,9 @@ export default function Header() {
     }
 
     return (
-        <header className="bg-secondary text-white py-4 sticky top-0 z-20">
-            <div className="container mx-auto flex justify-between items-center">
-                <h1 className="text-2xl font-bold">MentorConnect</h1>
+        <header className="bg-slate-50 text-white py-4 sticky top-0 z-20 shadow-xl">
+            <div className="container mx-auto flex justify-between items-center text-black ">
+                <h1 className="text-2xl font-bold text-black">MentorConnect</h1>
                 <nav className="hidden md:block">
                     <ul className="flex space-x-4">
                         <li><Link href="/findMentor" className="hover:text-primary transition-colors">Find a Mentor</Link></li>
@@ -50,7 +50,7 @@ export default function Header() {
                 </nav>
                 <div className="hidden md:block">
                     <Link href="/login">
-                        <Button className="bg-primary hover:bg-primary-hover text-white transition-colors">Login/Signup</Button>
+                        <Button className="bg-blue-600 hover:bg-black text-white transition-colors">Login/Signup</Button>
                     </Link>
                 </div>
                 <button className="md:hidden text-white" onClick={toggleMobileMenu}>
