@@ -63,7 +63,7 @@ export default function Component() {
                 <h2 className="text-lg font-semibold text-[#0B090A] mb-1">{mentor.name}</h2>
                 <p className="text-[#161A1D] text-sm mb-2">{mentor.role}</p>
                 <p className="text-[#6C6E6F] text-sm mb-2">{mentor.description}</p> {/* Added description */}
-                <Button className="mt-4 bg-[#A4161A] hover:bg-[#BA181B] text-white transition-colors">
+                <Button className="mt-4 bg-slate-500 hover:bg-black text-white transition-colors">
                   View Profile
                 </Button>
               </CardContent>

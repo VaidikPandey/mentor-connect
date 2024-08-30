@@ -9,15 +9,15 @@ import Header from '@/components/Header'
 import Footer from '@/components/Footer'
 
 const courses = [
-    { id: 1, title: "Complete Machine Learning Bootcamp", category: "Data Science", duration: "12 weeks", lessons: 60, students: 1500, rating: 4.8, level: "Beginner to Advanced", instructor: "Dr. Alice Johnson", price: 9999, thumbnail: "/placeholder.svg?height=400&width=600" },
-    { id: 2, title: "Advanced React and Redux", category: "Web Development", duration: "8 weeks", lessons: 48, students: 1200, rating: 4.9, level: "Intermediate", instructor: "Bob Smith", price: 7999, thumbnail: "/placeholder.svg?height=400&width=600" },
-    { id: 3, title: "Cybersecurity Specialist Certification", category: "Security", duration: "16 weeks", lessons: 80, students: 800, rating: 4.7, level: "Advanced", instructor: "Carol Williams", price: 12999, thumbnail: "/placeholder.svg?height=400&width=600" },
-    { id: 4, title: "Data Visualization Mastery", category: "Data Science", duration: "6 weeks", lessons: 36, students: 950, rating: 4.6, level: "Intermediate", instructor: "David Brown", price: 5999, thumbnail: "/placeholder.svg?height=400&width=600" },
-    { id: 5, title: "Cloud Architecture and DevOps", category: "Cloud Computing", duration: "10 weeks", lessons: 55, students: 700, rating: 4.8, level: "Advanced", instructor: "Eva Davis", price: 11499, thumbnail: "/placeholder.svg?height=400&width=600" },
-    { id: 6, title: "UI/UX Design from Scratch", category: "Design", duration: "8 weeks", lessons: 40, students: 1800, rating: 4.5, level: "Beginner", instructor: "Frank Miller", price: 6999, thumbnail: "/placeholder.svg?height=400&width=600" },
-    { id: 7, title: "Blockchain Development", category: "Blockchain", duration: "14 weeks", lessons: 70, students: 600, rating: 4.7, level: "Intermediate to Advanced", instructor: "George Wilson", price: 13999, thumbnail: "/placeholder.svg?height=400&width=600" },
-    { id: 8, title: "Python for Data Science and AI", category: "Data Science", duration: "10 weeks", lessons: 50, students: 2000, rating: 4.9, level: "Beginner to Intermediate", instructor: "Hannah Brown", price: 8999, thumbnail: "/placeholder.svg?height=400&width=600" },
-    { id: 9, title: "Full-Stack Mobile App Development", category: "Mobile Development", duration: "16 weeks", lessons: 80, students: 1100, rating: 4.6, level: "Intermediate to Advanced", instructor: "Ian Taylor", price: 14999, thumbnail: "/placeholder.svg?height=400&width=600" },
+    { id: 1, title: "Complete Machine Learning Bootcamp", category: "Data Science", duration: "12 weeks", lessons: 60, students: 1500, rating: 4.8, level: "Beginner to Advanced", instructor: "Dr. Alice Johnson", price: 9999, thumbnail: "https://img.freepik.com/free-vector/flat-design-people-business-training-illustrated_23-2148913909.jpg?size=626&ext=jpg" },
+    { id: 2, title: "Advanced React and Redux", category: "Web Development", duration: "8 weeks", lessons: 48, students: 1200, rating: 4.9, level: "Intermediate", instructor: "Bob Smith", price: 7999, thumbnail: "https://img.freepik.com/free-vector/flat-design-people-business-training-illustrated_23-2148913909.jpg?size=626&ext=jpg"},
+    { id: 3, title: "Cybersecurity Specialist Certification", category: "Security", duration: "16 weeks", lessons: 80, students: 800, rating: 4.7, level: "Advanced", instructor: "Carol Williams", price: 12999, thumbnail: "https://img.freepik.com/free-vector/flat-design-people-business-training-illustrated_23-2148913909.jpg?size=626&ext=jpg" },
+    { id: 4, title: "Data Visualization Mastery", category: "Data Science", duration: "6 weeks", lessons: 36, students: 950, rating: 4.6, level: "Intermediate", instructor: "David Brown", price: 5999, thumbnail: "https://img.freepik.com/free-vector/flat-design-people-business-training-illustrated_23-2148913909.jpg?size=626&ext=jpg" },
+    { id: 5, title: "Cloud Architecture and DevOps", category: "Cloud Computing", duration: "10 weeks", lessons: 55, students: 700, rating: 4.8, level: "Advanced", instructor: "Eva Davis", price: 11499, thumbnail: "https://img.freepik.com/free-vector/flat-design-people-business-training-illustrated_23-2148913909.jpg?size=626&ext=jpg" },
+    { id: 6, title: "UI/UX Design from Scratch", category: "Design", duration: "8 weeks", lessons: 40, students: 1800, rating: 4.5, level: "Beginner", instructor: "Frank Miller", price: 6999, thumbnail: "https://img.freepik.com/free-vector/flat-design-people-business-training-illustrated_23-2148913909.jpg?size=626&ext=jpg" },
+    { id: 7, title: "Blockchain Development", category: "Blockchain", duration: "14 weeks", lessons: 70, students: 600, rating: 4.7, level: "Intermediate to Advanced", instructor: "George Wilson", price: 13999, thumbnail: "https://img.freepik.com/free-vector/flat-design-people-business-training-illustrated_23-2148913909.jpg?size=626&ext=jpg" },
+    { id: 8, title: "Python for Data Science and AI", category: "Data Science", duration: "10 weeks", lessons: 50, students: 2000, rating: 4.9, level: "Beginner to Intermediate", instructor: "Hannah Brown", price: 8999, thumbnail: "https://img.freepik.com/free-vector/flat-design-people-business-training-illustrated_23-2148913909.jpg?size=626&ext=jpg" },
+    { id: 9, title: "Full-Stack Mobile App Development", category: "Mobile Development", duration: "16 weeks", lessons: 80, students: 1100, rating: 4.6, level: "Intermediate to Advanced", instructor: "Ian Taylor", price: 14999, thumbnail: "https://img.freepik.com/free-vector/flat-design-people-business-training-illustrated_23-2148913909.jpg?size=626&ext=jpg" },
 ]
 
 export default function CoursesPage() {
@@ -40,7 +40,7 @@ export default function CoursesPage() {
         <div className="min-h-screen flex flex-col bg-gradient-to-b from-base-200 to-base-300 text-base-content">
             <Header />
             <main className="container mx-auto px-4 py-8 flex-grow">
-                <h1 className="text-3xl md:text-4xl font-bold mb-6 text-center text-primary">
+                <h1 className="text-3xl md:text-4xl font-bold mb-6 text-center text-blue-600">
                     Explore Our <span className="text-secondary">Expert-Led Courses</span>
                 </h1>
 
@@ -51,13 +51,13 @@ export default function CoursesPage() {
                             placeholder="Search courses..."
                             value={searchTerm}
                             onChange={(e) => setSearchTerm(e.target.value)}
-                            className="w-full pl-10 pr-4 py-3 rounded-full border-2 border-primary focus:outline-none focus:border-secondary transition-colors duration-300"
+                            className="w-full pl-10 pr-4 py-3 rounded-full border-2 border-gray-600 focus:outline-none focus:border-secondary transition-colors duration-300"
                         />
                         <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-primary" size={24} />
                     </div>
                     <div className="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4 w-full md:w-1/3">
                         <Select value={selectedCategory} onValueChange={setSelectedCategory}>
-                            <SelectTrigger className="w-full sm:w-1/2  bg-white border-2 border-primary" >
+                            <SelectTrigger className="w-full sm:w-1/2  bg-white border-2 border-gray-600" >
                                 <SelectValue placeholder="Category" />
                             </SelectTrigger>
                             <SelectContent className="bg-white">
@@ -67,7 +67,7 @@ export default function CoursesPage() {
                             </SelectContent>
                         </Select>
                         <Select value={selectedLevel} onValueChange={setSelectedLevel}>
-                            <SelectTrigger className="w-full sm:w-1/2  bg-white border-2 border-primary">
+                            <SelectTrigger className="w-full sm:w-1/2  bg-white border-2 border-gray-600">
                                 <SelectValue placeholder="Level" />
                             </SelectTrigger>
                             <SelectContent className="bg-white">
@@ -116,7 +116,7 @@ export default function CoursesPage() {
                                 </div>
                                 <div className="flex justify-between items-center mt-4">
                                     <span className="text-lg font-bold">₹{course.price}</span>
-                                    <Link href={`/courses/${course.id}`} className="btn btn-primary bg-red-500 text-white hover:bg-red-600 rounded-lg px-4 py-2 transition-colors text-sm">
+                                    <Link href={`/courses/${course.id}`} className="btn btn-primary bg-blue-600 text-white hover:bg-black rounded-lg px-4 py-2 transition-colors text-sm">
                                         Enroll Now
                                     </Link>
                                 </div>
