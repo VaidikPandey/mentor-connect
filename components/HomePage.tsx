@@ -2,6 +2,7 @@
 import React, { useState, useEffect, useCallback } from 'react'
 import Header from '@/components/Header'
 import Footer from '@/components/Footer'
+import axios from 'axios';
 
 
 const reviews = [
@@ -218,3 +219,22 @@ const HomePage: React.FC<HomePageProps> = ({ mentors = [] }) => {
 };
 
 export default HomePage;
+
+// Fetch data for SSR
+export const getServerSideProps = async () => {
+    try {
+      const { data } = await axios.get<Mentor[]>('http://localhost:3000/api/home');
+      return {
+        props: {
+          mentors: data,
+        },
+      };
+    } catch (error) {
+      console.error('Failed to fetch mentors:', error);
+      return {
+        props: {
+          mentors: [],
+        },
+      };
+    }
+  };
