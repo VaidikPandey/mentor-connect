@@ -163,11 +163,11 @@ export default function SignUpPage() {
   const renderInput = (id: string, label: string, type = "text", placeholder = "") => (
     <div className="space-y-2">
       <Label htmlFor={id}>{label}</Label>
-      <Input 
-        id={id} 
-        type={type} 
-        placeholder={placeholder} 
-        required 
+      <Input
+        id={id}
+        type={type}
+        placeholder={placeholder}
+        required
       />
     </div>
   );
@@ -175,9 +175,9 @@ export default function SignUpPage() {
   const renderTextarea = (id: string, label: string, placeholder: string) => (
     <div className="space-y-2">
       <Label htmlFor={id}>{label}</Label>
-      <Textarea 
-        id={id} 
-        placeholder={placeholder} 
+      <Textarea
+        id={id}
+        placeholder={placeholder}
       />
     </div>
   );
@@ -221,15 +221,15 @@ export default function SignUpPage() {
           <CardContent className="pt-6">
             <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
               <TabsList className="grid w-full grid-cols-2 mb-4 bg-[#D9D9D9]">
-                <TabsTrigger 
-                  value="mentee" 
+                <TabsTrigger
+                  value="mentee"
                   activeValue={activeTab}
                   onClick={() => setActiveTab('mentee')}
                   className="rounded-tl-md rounded-bl-md"
                 >
                   I'm a Mentee
                 </TabsTrigger>
-                <TabsTrigger 
+                <TabsTrigger
                   value="mentor"
                   activeValue={activeTab}
                   onClick={() => setActiveTab('mentor')}
