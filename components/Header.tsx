@@ -22,7 +22,7 @@ const MobileMenu: React.FC<MobileMenuProps> = ({ isOpen, onClose }) => {
                 <Link href="/seminars" className="text-white py-2 hover:text-primary transition-colors" onClick={onClose}>Seminars</Link>
                 <Link href="/cources" className="text-white py-2 hover:text-primary transition-colors" onClick={onClose}>Courses</Link>
                 <Link href="#" className="text-white py-2 hover:text-primary transition-colors" onClick={onClose}>Pricing</Link>
-                <Link href="/signup" className="text-white py-2 hover:text-primary transition-colors" onClick={onClose}>Sign Up</Link>
+                <Link href="/login" className="text-white py-2 hover:text-primary transition-colors" onClick={onClose}>Sign Up</Link>
             </nav>
         </div>
     )
@@ -42,14 +42,14 @@ export default function Header() {
                 <nav className="hidden md:block">
                     <ul className="flex space-x-4">
                         <li><Link href="/findMentor" className="hover:text-primary transition-colors">Find a Mentor</Link></li>
-                        <li><Link href="/signup" className="hover:text-primary transition-colors">Become a Mentor</Link></li>
+                        <li><Link href="/login" className="hover:text-primary transition-colors">Become a Mentor</Link></li>
                         <li><Link href="/seminars" className="hover:text-primary transition-colors">Seminars</Link></li>
                         <li><Link href="/cources" className="hover:text-primary transition-colors">Courses</Link></li>
                         <li><Link href="#" className="hover:text-primary transition-colors">Pricing</Link></li>
                     </ul>
                 </nav>
                 <div className="hidden md:block">
-                    <Link href="/signup">
+                    <Link href="/login">
                         <Button className="bg-primary hover:bg-primary-hover text-white transition-colors">Login/Signup</Button>
                     </Link>
                 </div>
