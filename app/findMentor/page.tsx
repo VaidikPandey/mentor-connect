@@ -10,14 +10,14 @@ import Header from '@/components/Header'
 import Footer from '@/components/Footer'
 
 const mentors = [
-  { name: "Kevin Indig", role: "Director of SEO at Shopify", image: "/placeholder.svg?height=100&width=100", description: "Kevin is a seasoned SEO expert with years of experience in optimizing search engine performance and strategy." },
-  { name: "Ray Forer", role: "Co-Founder at Quartz VC", image: "/placeholder.svg?height=100&width=100", description: "Ray is a venture capitalist with a focus on investing in innovative startups and emerging technologies." },
-  { name: "Hannah Parvaz", role: "Head of Growth at Curio", image: "/placeholder.svg?height=100&width=100", description: "Hannah excels in scaling businesses through growth strategies and data-driven marketing approaches." },
-  { name: "Eden Bidani", role: "Conversion Copywriter", image: "/placeholder.svg?height=100&width=100", description: "Eden specializes in crafting compelling copy that drives conversions and engages audiences." },
-  { name: "Nurkan Kirkan", role: "Head of Growth at Trustpilot", image: "/placeholder.svg?height=100&width=100", description: "Nurkan leads growth initiatives with a focus on expanding Trustpilot’s market presence and customer engagement." },
-  { name: "Michael Taylor", role: "Co-Founder at Ladder.io", image: "/placeholder.svg?height=100&width=100", description: "Michael is an entrepreneur with a track record of building and scaling successful startups." },
-  { name: "Joanna Delaney", role: "Senior Marketing Strategist at Videous", image: "/placeholder.svg?height=100&width=100", description: "Joanna provides strategic marketing insights and campaigns to drive brand growth and customer acquisition." },
-  { name: "Margarita Loktionova", role: "Content Marketing Lead at Semrush", image: "/placeholder.svg?height=100&width=100", description: "Margarita leads content marketing efforts, creating impactful content strategies that enhance brand visibility." },
+  { name: "Kevin Indig", role: "Director of SEO at Shopify", image: "https://img.freepik.com/premium-vector/auctioneer-vector-character-flat-style_1033579-66356.jpg?ga=GA1.1.1867255598.1725018948&semt=ais_hybrid", description: "Kevin is a seasoned SEO expert with years of experience in optimizing search engine performance and strategy." },
+  { name: "Ray Forer", role: "Co-Founder at Quartz VC", image: "https://img.freepik.com/premium-vector/auctioneer-vector-character-flat-style_1033579-66356.jpg?ga=GA1.1.1867255598.1725018948&semt=ais_hybrid", description: "Ray is a venture capitalist with a focus on investing in innovative startups and emerging technologies." },
+  { name: "Hannah Parvaz", role: "Head of Growth at Curio", image: "https://img.freepik.com/premium-vector/auctioneer-vector-character-flat-style_1033579-66356.jpg?ga=GA1.1.1867255598.1725018948&semt=ais_hybrid", description: "Hannah excels in scaling businesses through growth strategies and data-driven marketing approaches." },
+  { name: "Eden Bidani", role: "Conversion Copywriter", image: "https://img.freepik.com/premium-vector/auctioneer-vector-character-flat-style_1033579-66356.jpg?ga=GA1.1.1867255598.1725018948&semt=ais_hybrid", description: "Eden specializes in crafting compelling copy that drives conversions and engages audiences." },
+  { name: "Nurkan Kirkan", role: "Head of Growth at Trustpilot", image: "https://img.freepik.com/premium-vector/auctioneer-vector-character-flat-style_1033579-66356.jpg?ga=GA1.1.1867255598.1725018948&semt=ais_hybrid", description: "Nurkan leads growth initiatives with a focus on expanding Trustpilot’s market presence and customer engagement." },
+  { name: "Michael Taylor", role: "Co-Founder at Ladder.io", image: "https://img.freepik.com/premium-vector/auctioneer-vector-character-flat-style_1033579-66356.jpg?ga=GA1.1.1867255598.1725018948&semt=ais_hybrid", description: "Michael is an entrepreneur with a track record of building and scaling successful startups." },
+  { name: "Joanna Delaney", role: "Senior Marketing Strategist at Videous", image: "https://img.freepik.com/premium-vector/auctioneer-vector-character-flat-style_1033579-66356.jpg?ga=GA1.1.1867255598.1725018948&semt=ais_hybrid", description: "Joanna provides strategic marketing insights and campaigns to drive brand growth and customer acquisition." },
+  { name: "Margarita Loktionova", role: "Content Marketing Lead at Semrush", image: "https://img.freepik.com/premium-vector/auctioneer-vector-character-flat-style_1033579-66356.jpg?ga=GA1.1.1867255598.1725018948&semt=ais_hybrid", description: "Margarita leads content marketing efforts, creating impactful content strategies that enhance brand visibility." },
 ]
 
 export default function Component() {
@@ -33,7 +33,7 @@ export default function Component() {
   return (
     <div className="bg-[#F5F3F4] min-h-screen flex flex-col">
       <Header />
-      {/* Main Content */}
+
       <main className="flex-grow container mx-auto px-4 py-8">
         <h1 className="text-4xl font-bold text-[#0B090A] mb-8 text-center">Discover Your Perfect Mentor</h1>
 
@@ -58,12 +58,12 @@ export default function Component() {
                 <img
                   src={mentor.image}
                   alt={mentor.name}
-                  className="w-24 h-24 rounded-full mb-4 border-2 border-[#BA181B]"
+                  className="w-24 h-24 rounded-full mb-4 border-2 border-gray-600"
                 />
                 <h2 className="text-lg font-semibold text-[#0B090A] mb-1">{mentor.name}</h2>
                 <p className="text-[#161A1D] text-sm mb-2">{mentor.role}</p>
                 <p className="text-[#6C6E6F] text-sm mb-2">{mentor.description}</p> {/* Added description */}
-                <Button className="mt-4 bg-slate-500 hover:bg-black text-white transition-colors">
+                <Button className="mt-4 bg-blue-600 hover:bg-black text-white transition-colors">
                   View Profile
                 </Button>
               </CardContent>
