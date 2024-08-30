@@ -2,6 +2,7 @@
 import { useState } from "react";
 import * as React from "react";
 import Link from "next/link";
+import axios from "axios";
 
 // Button component
 const Button = React.forwardRef<HTMLButtonElement, React.ButtonHTMLAttributes<HTMLButtonElement>>(
@@ -159,6 +160,26 @@ const GraduationCapIcon = () => (
 
 export default function SignUpPage() {
   const [activeTab, setActiveTab] = useState('mentee');
+  const [formData, setFormData] = useState({});
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    setFormData({
+      ...formData,
+      [e.target.id]: e.target.value,
+    });
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    try {
+      const response = await axios.post('/api/signup', formData);
+      console.log('Response:', response.data);
+      // Handle successful submission (e.g., redirect, display a message, etc.)
+    } catch (error) {
+      console.error('Error:', error);
+      // Handle error (e.g., display an error message)
+    }
+  };
 
   const renderInput = (id: string, label: string, type = "text", placeholder = "") => (
     <div className="space-y-2">
@@ -168,6 +189,7 @@ export default function SignUpPage() {
         type={type}
         placeholder={placeholder}
         required
+        onChange={handleChange}
       />
     </div>
   );
@@ -178,6 +200,7 @@ export default function SignUpPage() {
       <Textarea
         id={id}
         placeholder={placeholder}
+        onChange={handleChange}
       />
     </div>
   );
@@ -189,6 +212,7 @@ export default function SignUpPage() {
         <Link href="/" className="text-4xl font-bold mb-8">
           <span className="text-[#E5383B]">Mentor</span>Connect
         </Link>
+        {/* Icons and descriptions */}
         <div className="space-y-3 text-center">
           <div className="hover:transform hover:scale-105 transition-transform duration-300 cursor-pointer">
             <UsersIcon />
@@ -239,17 +263,20 @@ export default function SignUpPage() {
                 </TabsTrigger>
               </TabsList>
               <TabsContent value="mentee" activeValue={activeTab}>
-                <form className="space-y-4">
+                <form className="space-y-4" onSubmit={handleSubmit}>
                   <div className="grid sm:grid-cols-2 gap-4">
                     {renderInput("mentee-name", "Name", "text", "John Doe")}
                     {renderInput("mentee-email", "Email", "email", "john@example.com")}
                   </div>
                   {renderInput("mentee-password", "Password", "password")}
                   {renderTextarea("mentee-bio", "Bio", "Tell us about yourself and what you hope to learn")}
+                  <Button type="submit" className="w-full">
+                    Sign Up
+                  </Button>
                 </form>
               </TabsContent>
               <TabsContent value="mentor" activeValue={activeTab}>
-                <form className="space-y-4">
+                <form className="space-y-4" onSubmit={handleSubmit}>
                   <div className="grid sm:grid-cols-2 gap-4">
                     {renderInput("mentor-name", "Name", "text", "Jane Smith")}
                     {renderInput("mentor-email", "Email", "email", "jane@example.com")}
@@ -260,14 +287,14 @@ export default function SignUpPage() {
                   {renderInput("mentor-degree", "Degree", "text", "e.g. Bachelor's in Computer Science")}
                   {renderInput("mentor-specialization", "Specialization", "text", "e.g. Machine Learning")}
                   {renderTextarea("mentor-places-worked", "Places Worked", "List the companies or institutions you've worked for")}
+                  <Button type="submit" className="w-full">
+                    Sign Up
+                  </Button>
                 </form>
               </TabsContent>
             </Tabs>
           </CardContent>
           <CardFooter className="flex flex-col space-y-4">
-            <Button className="w-full">
-              Sign Up
-            </Button>
             <p className="text-sm text-[#353535] text-center">
               By signing up, you agree to our{" "}
               <a href="#" className="text-[#3C6E71] hover:underline">

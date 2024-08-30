@@ -1,18 +1,42 @@
 'use client'
 
 import React, { useState } from 'react'
+import axios from 'axios'
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { ArrowRight, Users, UserPlus, Briefcase, GraduationCap } from 'lucide-react'
+import { ArrowRight, Users, Briefcase, GraduationCap } from 'lucide-react'
 import Link from 'next/link'
 
 export default function LoginPage() {
     const [activeTab, setActiveTab] = useState<'mentor' | 'mentee'>('mentor')
+    const [email, setEmail] = useState('')
+    const [password, setPassword] = useState('')
 
     const handleTabChange = (value: 'mentor' | 'mentee') => {
         setActiveTab(value)
+    }
+
+    const handleLogin = async (event: React.FormEvent) => {
+        event.preventDefault()
+
+        try {
+            // Use absolute URL if your API is on a different domain
+            const response = await axios.post('/api/auth/login', {
+                email,
+                password,
+                role: activeTab
+            })
+
+            // Handle successful login here
+            console.log('Login successful:', response.data)
+            // You can redirect the user or show a success message here
+        } catch (error) {
+            // Handle errors here
+            console.error('Login failed:', error)
+            // Show an error message to the user here
+        }
     }
 
     return (
@@ -52,42 +76,44 @@ export default function LoginPage() {
                             <TabsList className="grid w-full grid-cols-2 mb-8">
                                 <TabsTrigger
                                     value="mentor"
-                                    className={`text-lg font-semibold py-3 rounded-full transition-all duration-300 mr-1 ${
-                                        activeTab === 'mentor'
+                                    className={`text-lg font-semibold py-3 rounded-full transition-all duration-300 mr-1 ${activeTab === 'mentor'
                                             ? 'bg-blue-600 text-white shadow-md'
                                             : 'bg-[#D3D3D3] text-[#0B090A]'
-                                    } hover:bg-blue-600 hover:text-white hover:shadow-md`}
+                                        } hover:bg-blue-600 hover:text-white hover:shadow-md`}
                                 >
-                                I'm a Mentee
+                                    I'm a Mentee
                                 </TabsTrigger>
                                 <TabsTrigger
                                     value="mentee"
-                                    className={`text-lg font-semibold py-3 rounded-full transition-all duration-300 ${
-                                        activeTab === 'mentee'
+                                    className={`text-lg font-semibold py-3 rounded-full transition-all duration-300 ${activeTab === 'mentee'
                                             ? 'bg-blue-600 text-white shadow-md'
                                             : 'bg-[#D3D3D3] text-[#0B090A]'
-                                    } hover:bg-blue-600 hover:text-white hover:shadow-md`}
+                                        } hover:bg-blue-600 hover:text-white hover:shadow-md`}
                                 >
-                                I'm a Mentor
+                                    I'm a Mentor
                                 </TabsTrigger>
                             </TabsList>
                             <TabsContent value="mentor">
-                                <form className="space-y-6">
+                                <form className="space-y-6" onSubmit={handleLogin}>
                                     <div>
-                                        <Input 
-                                            type="email" 
-                                            placeholder="Email" 
+                                        <Input
+                                            type="email"
+                                            placeholder="Email"
+                                            value={email}
+                                            onChange={(e) => setEmail(e.target.value)}
                                             className="bg-white border-[#B1A7A6] focus:border-blue-600 transition-colors duration-300 rounded-full py-6"
                                         />
                                     </div>
                                     <div>
-                                        <Input 
-                                            type="password" 
-                                            placeholder="Password" 
+                                        <Input
+                                            type="password"
+                                            placeholder="Password"
+                                            value={password}
+                                            onChange={(e) => setPassword(e.target.value)}
                                             className="bg-white border-[#B1A7A6] focus:border-blue-600 transition-colors duration-300 rounded-full py-6"
                                         />
                                     </div>
-                                    <Button className="w-full bg-blue-600 hover:bg-blue-600 text-white transition-colors duration-300 flex items-center justify-center rounded-full py-6">
+                                    <Button type="submit" className="w-full bg-blue-600 hover:bg-blue-600 text-white transition-colors duration-300 flex items-center justify-center rounded-full py-6">
                                         Log In as Mentor <ArrowRight className="ml-2" size={18} />
                                     </Button>
                                 </form>
@@ -99,22 +125,26 @@ export default function LoginPage() {
                                 </p>
                             </TabsContent>
                             <TabsContent value="mentee">
-                                <form className="space-y-6">
+                                <form className="space-y-6" onSubmit={handleLogin}>
                                     <div>
-                                        <Input 
-                                            type="email" 
-                                            placeholder="Email" 
+                                        <Input
+                                            type="email"
+                                            placeholder="Email"
+                                            value={email}
+                                            onChange={(e) => setEmail(e.target.value)}
                                             className="bg-white border-[#B1A7A6] focus:border-blue-600 transition-colors duration-300 rounded-full py-6"
                                         />
                                     </div>
                                     <div>
-                                        <Input 
-                                            type="password" 
-                                            placeholder="Password" 
+                                        <Input
+                                            type="password"
+                                            placeholder="Password"
+                                            value={password}
+                                            onChange={(e) => setPassword(e.target.value)}
                                             className="bg-white border-[#B1A7A6] focus:border-blue-600 transition-colors duration-300 rounded-full py-6"
                                         />
                                     </div>
-                                    <Button className="w-full bg-blue-600 hover:bg-blue-600 text-white transition-colors duration-300 flex items-center justify-center rounded-full py-6">
+                                    <Button type="submit" className="w-full bg-blue-600 hover:bg-blue-600 text-white transition-colors duration-300 flex items-center justify-center rounded-full py-6">
                                         Log In as Mentee <ArrowRight className="ml-2" size={18} />
                                     </Button>
                                 </form>
