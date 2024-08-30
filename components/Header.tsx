@@ -25,7 +25,7 @@ const MobileMenu: React.FC<MobileMenuProps> = ({ isOpen, onClose }) => {
                 <Link href="/opportunities" className="text-white py-2 hover:text-primary transition-colors" onClick={onClose}>Opportunities</Link>
                 <Link href="/blog" className="text-white py-2 hover:text-primary transition-colors" onClick={onClose}>Blog</Link>
                 <Link href="/library" className="text-white py-2 hover:text-primary transition-colors" onClick={onClose}>Library</Link>
-                <Link href="#" className="text-white py-2 hover:text-primary transition-colors" onClick={onClose}>Pricing</Link>
+                <Link href="/pricing" className="text-white py-2 hover:text-primary transition-colors" onClick={onClose}>Pricing</Link>
                 <Link href="/login" className="text-white py-2 hover:text-primary transition-colors" onClick={onClose}>Sign Up</Link>
             </nav>
         </div>
@@ -53,7 +53,7 @@ export default function Header() {
                         <li><Link href="/opportunities" className="hover:text-primary transition-colors">Opportunities</Link></li>
                         <li><Link href="/blog" className="hover:text-primary transition-colors">Blog</Link></li>
                         <li><Link href="/library" className="hover:text-primary transition-colors">Library</Link></li>
-                        <li><Link href="#" className="hover:text-primary transition-colors">Pricing</Link></li>
+                        <li><Link href="pricing" className="hover:text-primary transition-colors">Pricing</Link></li>
                     </ul>
                 </nav>
                 <div className="hidden md:block">
