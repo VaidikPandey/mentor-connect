@@ -46,20 +46,20 @@ export default function Component() {
                     Explore Our <span className="text-black">Seminars</span>
                 </h1>
 
-                <div className="mb-8 flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-4">
+                <div className="mb-8 flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-4 items-center">
                     <div className="w-full md:w-2/3 relative">
                         <Input
                             type="text"
                             placeholder="Search seminars..."
                             value={searchTerm}
                             onChange={(e) => setSearchTerm(e.target.value)}
-                            className="w-full pl-10 pr-4 py-3 rounded-full border-2 border-gray-600 focus:outline-none  transition-colors duration-300 text-lg"
+                            className="w-full pl-10 pr-4 py-3 rounded-full border-2 border-gray-600 focus:outline-none  transition-colors duration-300 "
                         />
                         <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-primary" size={24} />
                     </div>
-                    <div className="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4 w-full md:w-1/3">
+                    <div className="flex space-x-4 w-full md:w-1/3">
                         <Select value={selectedCategory} onValueChange={setSelectedCategory}>
-                            <SelectTrigger className="w-full sm:w-1/2 bg-white border-2 border-gray-600">
+                            <SelectTrigger className="w-full sm:w-1/4 bg-white border-2 border-gray-600">
                                 <SelectValue placeholder="Category" />
                             </SelectTrigger>
                             <SelectContent className="bg-white">
@@ -71,7 +71,7 @@ export default function Component() {
                             </SelectContent>
                         </Select>
                         <Select value={selectedLevel} onValueChange={setSelectedLevel}>
-                            <SelectTrigger className="w-full sm:w-1/2 bg-white border-2 border-gray-600">
+                            <SelectTrigger className="w-full sm:w-1/4 bg-white border-2 border-gray-600">
                                 <SelectValue placeholder="Level" />
                             </SelectTrigger>
                             <SelectContent className="bg-white">
@@ -82,6 +82,9 @@ export default function Component() {
                                 ))}
                             </SelectContent>
                         </Select>
+                        <Link href="/courses/add" className="btn btn-primary bg-blue-600 text-white hover:bg-black rounded-lg px-4 py-2 transition-colors text-sm">
+                            Add Course
+                        </Link>
                     </div>
                 </div>
 

@@ -10,7 +10,7 @@ import Footer from '@/components/Footer'
 
 const courses = [
     { id: 1, title: "Complete Machine Learning Bootcamp", category: "Data Science", duration: "12 weeks", lessons: 60, students: 1500, rating: 4.8, level: "Beginner to Advanced", instructor: "Dr. Alice Johnson", price: 9999, thumbnail: "https://img.freepik.com/free-vector/flat-design-people-business-training-illustrated_23-2148913909.jpg?size=626&ext=jpg" },
-    { id: 2, title: "Advanced React and Redux", category: "Web Development", duration: "8 weeks", lessons: 48, students: 1200, rating: 4.9, level: "Intermediate", instructor: "Bob Smith", price: 7999, thumbnail: "https://img.freepik.com/free-vector/flat-design-people-business-training-illustrated_23-2148913909.jpg?size=626&ext=jpg"},
+    { id: 2, title: "Advanced React and Redux", category: "Web Development", duration: "8 weeks", lessons: 48, students: 1200, rating: 4.9, level: "Intermediate", instructor: "Bob Smith", price: 7999, thumbnail: "https://img.freepik.com/free-vector/flat-design-people-business-training-illustrated_23-2148913909.jpg?size=626&ext=jpg" },
     { id: 3, title: "Cybersecurity Specialist Certification", category: "Security", duration: "16 weeks", lessons: 80, students: 800, rating: 4.7, level: "Advanced", instructor: "Carol Williams", price: 12999, thumbnail: "https://img.freepik.com/free-vector/flat-design-people-business-training-illustrated_23-2148913909.jpg?size=626&ext=jpg" },
     { id: 4, title: "Data Visualization Mastery", category: "Data Science", duration: "6 weeks", lessons: 36, students: 950, rating: 4.6, level: "Intermediate", instructor: "David Brown", price: 5999, thumbnail: "https://img.freepik.com/free-vector/flat-design-people-business-training-illustrated_23-2148913909.jpg?size=626&ext=jpg" },
     { id: 5, title: "Cloud Architecture and DevOps", category: "Cloud Computing", duration: "10 weeks", lessons: 55, students: 700, rating: 4.8, level: "Advanced", instructor: "Eva Davis", price: 11499, thumbnail: "https://img.freepik.com/free-vector/flat-design-people-business-training-illustrated_23-2148913909.jpg?size=626&ext=jpg" },
@@ -44,7 +44,7 @@ export default function CoursesPage() {
                     Explore Our <span className="text-secondary">Expert-Led Courses</span>
                 </h1>
 
-                <div className="mb-8 flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-4">
+                <div className="mb-8 flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-4 items-center">
                     <div className="w-full md:w-2/3 relative">
                         <Input
                             type="text"
@@ -55,9 +55,9 @@ export default function CoursesPage() {
                         />
                         <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-primary" size={24} />
                     </div>
-                    <div className="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4 w-full md:w-1/3">
+                    <div className="flex space-x-4 w-full md:w-1/3">
                         <Select value={selectedCategory} onValueChange={setSelectedCategory}>
-                            <SelectTrigger className="w-full sm:w-1/2  bg-white border-2 border-gray-600" >
+                            <SelectTrigger className="w-full sm:w-1/4 bg-white border-2 border-gray-600" >
                                 <SelectValue placeholder="Category" />
                             </SelectTrigger>
                             <SelectContent className="bg-white">
@@ -67,7 +67,7 @@ export default function CoursesPage() {
                             </SelectContent>
                         </Select>
                         <Select value={selectedLevel} onValueChange={setSelectedLevel}>
-                            <SelectTrigger className="w-full sm:w-1/2  bg-white border-2 border-gray-600">
+                            <SelectTrigger className="w-full sm:w-1/4 bg-white border-2 border-gray-600">
                                 <SelectValue placeholder="Level" />
                             </SelectTrigger>
                             <SelectContent className="bg-white">
@@ -76,6 +76,9 @@ export default function CoursesPage() {
                                 ))}
                             </SelectContent>
                         </Select>
+                        <Link href="/courses/add" className="btn btn-primary bg-blue-600 text-white hover:bg-black rounded-lg px-4 py-2 transition-colors text-sm">
+                            Add Course
+                        </Link>
                     </div>
                 </div>
 
