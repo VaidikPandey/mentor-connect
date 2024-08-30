@@ -4,9 +4,11 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
-import { ArrowRight, Search, Star, X, Menu } from 'lucide-react'
+import { ArrowRight, Search, Star } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
+import Header from '@/components/Header'
+import Footer from '@/components/Footer'
 
 interface Mentor {
     name: string;
@@ -76,35 +78,9 @@ const MentorCard: React.FC<MentorCardProps> = React.memo(({ mentor }) => (
 
 MentorCard.displayName = 'MentorCard'
 
-interface MobileMenuProps {
-    isOpen: boolean;
-    onClose: () => void;
-}
-
-const MobileMenu: React.FC<MobileMenuProps> = ({ isOpen, onClose }) => {
-    return (
-        <div className={`fixed inset-0 bg-secondary z-50 transform ${isOpen ? 'translate-x-0' : 'translate-x-full'} transition-transform duration-300 ease-in-out`}>
-            <div className="flex justify-end p-4">
-                <button onClick={onClose} className="text-white">
-                    <X size={24} />
-                </button>
-            </div>
-            <nav className="flex flex-col items-center">
-                <Link href="/findMentor" className="text-white py-2 hover:text-primary transition-colors" onClick={onClose}>Find a Mentor</Link>
-                <Link href="/signup" className="text-white py-2 hover:text-primary transition-colors" onClick={onClose}>Become a Mentor</Link>
-                <Link href="/seminars" className="text-white py-2 hover:text-primary transition-colors" onClick={onClose}>Seminars</Link>
-                <Link href="/cources" className="text-white py-2 hover:text-primary transition-colors" onClick={onClose}>Courses</Link>
-                <Link href="#" className="text-white py-2 hover:text-primary transition-colors" onClick={onClose}>Pricing</Link>
-                <Link href="/signup" className="text-white py-2 hover:text-primary transition-colors" onClick={onClose}>Sign Up</Link>
-            </nav>
-        </div>
-    )
-}
-
 export default function HomePage() {
     const [activeMentor, setActiveMentor] = useState(0)
     const [activeTestimonial, setActiveTestimonial] = useState(0)
-    const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
 
     const nextMentor = useCallback(() => {
         setActiveMentor((prev) => (prev + 1) % mentors.length)
@@ -123,36 +99,9 @@ export default function HomePage() {
         }
     }, [nextMentor, nextTestimonial])
 
-    const toggleMobileMenu = () => {
-        setIsMobileMenuOpen(!isMobileMenuOpen)
-    }
-
     return (
         <div className="min-h-screen bg-background-light text-text-primary">
-            <header className="bg-secondary text-white py-4 sticky top-0 z-20">
-                <div className="container mx-auto flex justify-between items-center">
-                    <h1 className="text-2xl font-bold">MentorConnect</h1>
-                    <nav className="hidden md:block">
-                        <ul className="flex space-x-4">
-                            <li><Link href="/findMentor" className="hover:text-primary transition-colors">Find a Mentor</Link></li>
-                            <li><Link href="/signup" className="hover:text-primary transition-colors">Become a Mentor</Link></li>
-                            <li><Link href="/seminars" className="hover:text-primary transition-colors">Seminars</Link></li>
-                            <li><Link href="/cources" className="hover:text-primary transition-colors">Courses</Link></li>
-                            <li><Link href="#" className="hover:text-primary transition-colors">Pricing</Link></li>
-                        </ul>
-                    </nav>
-                    <div className="hidden md:block">
-                        <Link href="/signup">
-                            <Button className="bg-primary hover:bg-primary-hover text-white transition-colors">Login/Signup</Button>
-                        </Link>
-                    </div>
-                    <button className="md:hidden text-white" onClick={toggleMobileMenu}>
-                        <Menu size={24} />
-                    </button>
-                </div>
-            </header>
-
-            <MobileMenu isOpen={isMobileMenuOpen} onClose={() => setIsMobileMenuOpen(false)} />
+            <Header />
 
             <main className="container mx-auto mt-12 px-4">
                 <section className="text-center mb-16">
@@ -221,34 +170,7 @@ export default function HomePage() {
                 </div>
             </section>
 
-            <footer className="bg-[#0B090A] text-white py-12">
-                <div className="container mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
-                    <div>
-                        <h4 className="text-xl font-bold mb-4">MentorConnect</h4>
-                        <p className="text-[#B1A7A6]">Connecting aspiring professionals with industry-leading mentors.</p>
-                    </div>
-                    <div>
-                        <h5 className="text-lg font-semibold mb-4">Quick Links</h5>
-                        <ul className="space-y-2">
-                            <li><Link href="#" className="text-[#B1A7A6] hover:text-white transition-colors">About Us</Link></li>
-                            <li><Link href="#" className="text-[#B1A7A6] hover:text-white transition-colors">How It Works</Link></li>
-                            <li><Link href="#" className="text-[#B1A7A6] hover:text-white transition-colors">FAQ</Link></li>
-                            <li><Link href="#" className="text-[#B1A7A6] hover:text-white transition-colors">Contact Us</Link></li>
-                        </ul>
-                    </div>
-                    <div>
-                        <h5 className="text-lg font-semibold mb-4">Stay Connected</h5>
-                        <p className="text-[#B1A7A6] mb-4">Subscribe to our newsletter for the latest updates and mentor insights.</p>
-                        <div className="flex flex-col sm:flex-row">
-                            <Input className="bg-[#161A1D] text-white mb-2 sm:mb-0 sm:mr-2" placeholder="Your email" />
-                            <Button className="bg-[#A4161A] hover:bg-[#BA181B] text-white transition-colors">Subscribe</Button>
-                        </div>
-                    </div>
-                </div>
-                <div className="container mx-auto mt-8 pt-8 border-t border-[#161A1D] text-center">
-                    <p>&copy; {new Date().getFullYear()} MentorConnect. All rights reserved.</p>
-                </div>
-            </footer>
+            <Footer />
         </div>
     )
 }

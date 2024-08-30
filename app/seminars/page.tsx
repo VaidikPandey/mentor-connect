@@ -5,6 +5,8 @@ import { Input } from "@/components/ui/input"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import Link from "next/link"
 import { Search, Calendar, Clock, Users, Star, Briefcase, Facebook, Twitter, Instagram, Linkedin, Menu } from 'lucide-react'
+import Header from '@/components/Header'
+import Footer from '@/components/Footer'
 
 const seminars = [
     { id: 1, title: "Introduction to Machine Learning", category: "Data Science", date: "2023-07-15", time: "14:00", duration: "2 hours", capacity: 50, enrolled: 32, rating: 4.8, level: "Beginner", instructor: "Dr. Alice Johnson", price: 2999, thumbnail: "/placeholder.svg?height=400&width=600" },
@@ -36,36 +38,8 @@ export default function Component() {
 
     return (
         <div className="min-h-screen flex flex-col bg-gradient-to-b from-base-200 to-base-300 text-base-content">
-            <header className="bg-[#0B090A] text-white py-4">
-                <div className="container mx-auto px-4 flex justify-between items-center">
-                    <h1 className="text-2xl font-bold">MentorConnect</h1>
-                    <nav className="hidden md:block">
-                        <ul className="flex space-x-6">
-                            <li><Link href="/" className="hover:text-primary transition-colors">Home</Link></li>
-                            <li><Link href="/findMentor" className="hover:text-primary transition-colors">Find a Mentor</Link></li>
-                            <li><Link href="/cources" className="hover:text-primary transition-colors">Courses</Link></li>
-                            <li><Link href="/pricing" className="hover:text-primary transition-colors">Pricing</Link></li>
-                            <li><Link href="/signup" className="bg-[#E5383B] hover:bg-[#A4161A] text-white px-4 py-2 rounded transition-colors">Login/Signup</Link></li>
-                        </ul>
-                    </nav>
-                    <button className="md:hidden text-white" onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}>
-                        <Menu size={24} />
-                    </button>
-                </div>
-            </header>
 
-            {isMobileMenuOpen && (
-                <div className="md:hidden bg-[#0B090A] text-white py-4">
-                    <nav className="container mx-auto px-4">
-                        <ul className="space-y-2">
-                            <li><Link href="/" className="block hover:text-primary transition-colors">Home</Link></li>
-                            <li><Link href="/cources" className="block hover:text-primary transition-colors">Courses</Link></li>
-                            <li><Link href="/pricing" className="block hover:text-primary transition-colors">Pricing</Link></li>
-                            <li><Link href="/signup" className="block bg-[#E5383B] hover:bg-[#A4161A] text-white px-4 py-2 rounded transition-colors mt-2">Login/Signup</Link></li>
-                        </ul>
-                    </nav>
-                </div>
-            )}
+            <Header />
 
             <main className="container mx-auto px-4 py-8 flex-grow">
                 <h1 className="text-3xl md:text-4xl font-bold mb-6 text-center">
@@ -158,44 +132,7 @@ export default function Component() {
                 </div>
             </main>
 
-            <footer className="bg-[#0B090A] text-white py-8">
-                <div className="container mx-auto px-4">
-                    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
-                        <div>
-                            <h3 className="text-xl font-bold mb-4">MentorConnect</h3>
-                            <p className="text-sm">Connecting mentors and learners for a brighter future.</p>
-                        </div>
-                        <div>
-                            <h4 className="text-lg font-semibold mb-4">Quick Links</h4>
-                            <ul className="space-y-2">
-                                <li><Link href="/" className="hover:text-[#E5383B] transition-colors">Home</Link></li>
-                                <li><Link href="/seminars" className="hover:text-[#E5383B] transition-colors">Seminars</Link></li>
-                                <li><Link href="/courses" className="hover:text-[#E5383B] transition-colors">Courses</Link></li>
-                                <li><Link href="/pricing" className="hover:text-[#E5383B] transition-colors">Pricing</Link></li>
-                            </ul>
-                        </div>
-                        <div>
-                            <h4 className="text-lg font-semibold mb-4">Contact Us</h4>
-                            <p className="text-sm">123 Learning Street</p>
-                            <p className="text-sm">Education City, ED 12345</p>
-                            <p className="text-sm">Phone: (123) 456-7890</p>
-                            <p className="text-sm">Email: info@mentorconnect.com</p>
-                        </div>
-                        <div>
-                            <h4 className="text-lg font-semibold mb-4">Follow Us</h4>
-                            <div className="flex space-x-4">
-                                <a href="#" className="hover:text-[#E5383B] transition-colors"><Facebook size={24} /></a>
-                                <a href="#" className="hover:text-[#E5383B] transition-colors"><Twitter size={24} /></a>
-                                <a href="#" className="hover:text-[#E5383B] transition-colors"><Instagram size={24} /></a>
-                                <a href="#" className="hover:text-[#E5383B] transition-colors"><Linkedin size={24} /></a>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="mt-8 pt-8 border-t border-gray-700 text-center">
-                        <p className="text-sm">&copy; 2023 MentorConnect. All rights reserved.</p>
-                    </div>
-                </div>
-            </footer>
+            <Footer />
         </div>
     )
 }
