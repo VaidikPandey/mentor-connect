@@ -18,25 +18,25 @@ export default function LoginPage() {
     return (
         <div className="min-h-screen bg-[#F5F3F4] flex flex-col md:flex-row">
             {/* Left side with logo and info */}
-            <div className="w-full md:w-1/3 bg-[#161A1D] flex flex-col items-center justify-center p-8 text-white">
+            <div className="w-full md:w-1/3 bg-white flex flex-col items-center justify-center p-8 text-black">
                 <Link href="/" className="text-4xl font-bold mb-8">
-                    <span className="text-[#E5383B]">Mentor</span>Connect
+                    <span className="text-blue-600">Mentor</span>Connect
                 </Link>
                 <div className="space-y-6 text-center">
                     <div className="hover:transform hover:scale-105 transition-transform duration-300 cursor-pointer">
                         <Users size={48} className="mx-auto mb-2" />
                         <h3 className="text-xl font-semibold">Connect</h3>
-                        <p className="text-sm text-[#B1A7A6]">Find your perfect mentor or mentee match</p>
+                        <p className="text-sm text-black">Find your perfect mentor or mentee match</p>
                     </div>
                     <div className="hover:transform hover:scale-105 transition-transform duration-300 cursor-pointer">
                         <Briefcase size={48} className="mx-auto mb-2" />
                         <h3 className="text-xl font-semibold">Grow</h3>
-                        <p className="text-sm text-[#B1A7A6]">Accelerate your career with expert guidance</p>
+                        <p className="text-sm text-black">Accelerate your career with expert guidance</p>
                     </div>
                     <div className="hover:transform hover:scale-105 transition-transform duration-300 cursor-pointer">
                         <GraduationCap size={48} className="mx-auto mb-2" />
                         <h3 className="text-xl font-semibold">Learn</h3>
-                        <p className="text-sm text-[#B1A7A6]">Gain valuable insights and skills</p>
+                        <p className="text-sm text-black">Gain valuable insights and skills</p>
                     </div>
                 </div>
             </div>
@@ -54,19 +54,19 @@ export default function LoginPage() {
                                     value="mentor"
                                     className={`text-lg font-semibold py-3 rounded-full transition-all duration-300 mr-1 ${
                                         activeTab === 'mentor'
-                                            ? 'bg-[#A4161A] text-white shadow-md'
+                                            ? 'bg-blue-600 text-white shadow-md'
                                             : 'bg-[#D3D3D3] text-[#0B090A]'
-                                    } hover:bg-[#A4161A] hover:text-white hover:shadow-md`}
+                                    } hover:bg-blue-600 hover:text-white hover:shadow-md`}
                                 >
-                                I'm a Mentor
+                                I'm a Mentee
                                 </TabsTrigger>
                                 <TabsTrigger
                                     value="mentee"
                                     className={`text-lg font-semibold py-3 rounded-full transition-all duration-300 ${
                                         activeTab === 'mentee'
-                                            ? 'bg-[#A4161A] text-white shadow-md'
+                                            ? 'bg-blue-600 text-white shadow-md'
                                             : 'bg-[#D3D3D3] text-[#0B090A]'
-                                    } hover:bg-[#A4161A] hover:text-white hover:shadow-md`}
+                                    } hover:bg-blue-600 hover:text-white hover:shadow-md`}
                                 >
                                 I'm a Mentor
                                 </TabsTrigger>
@@ -77,23 +77,23 @@ export default function LoginPage() {
                                         <Input 
                                             type="email" 
                                             placeholder="Email" 
-                                            className="bg-white border-[#B1A7A6] focus:border-[#E5383B] transition-colors duration-300 rounded-full py-6"
+                                            className="bg-white border-[#B1A7A6] focus:border-blue-600 transition-colors duration-300 rounded-full py-6"
                                         />
                                     </div>
                                     <div>
                                         <Input 
                                             type="password" 
                                             placeholder="Password" 
-                                            className="bg-white border-[#B1A7A6] focus:border-[#E5383B] transition-colors duration-300 rounded-full py-6"
+                                            className="bg-white border-[#B1A7A6] focus:border-blue-600 transition-colors duration-300 rounded-full py-6"
                                         />
                                     </div>
-                                    <Button className="w-full bg-[#A4161A] hover:bg-[#BA181B] text-white transition-colors duration-300 flex items-center justify-center rounded-full py-6">
+                                    <Button className="w-full bg-blue-600 hover:bg-blue-600 text-white transition-colors duration-300 flex items-center justify-center rounded-full py-6">
                                         Log In as Mentor <ArrowRight className="ml-2" size={18} />
                                     </Button>
                                 </form>
-                                <p className="mt-6 text-center text-sm text-[#660708]">
+                                <p className="mt-6 text-center text-sm text-blue-600">
                                     Don't have an account?{" "}
-                                    <Link href="signup" className="font-medium text-[#E5383B] hover:underline transition-colors duration-300">
+                                    <Link href="signup" className="font-medium text-blue-600 hover:underline transition-colors duration-300">
                                         Sign up
                                     </Link>
                                 </p>
@@ -104,23 +104,23 @@ export default function LoginPage() {
                                         <Input 
                                             type="email" 
                                             placeholder="Email" 
-                                            className="bg-white border-[#B1A7A6] focus:border-[#E5383B] transition-colors duration-300 rounded-full py-6"
+                                            className="bg-white border-[#B1A7A6] focus:border-blue-600 transition-colors duration-300 rounded-full py-6"
                                         />
                                     </div>
                                     <div>
                                         <Input 
                                             type="password" 
                                             placeholder="Password" 
-                                            className="bg-white border-[#B1A7A6] focus:border-[#E5383B] transition-colors duration-300 rounded-full py-6"
+                                            className="bg-white border-[#B1A7A6] focus:border-blue-600 transition-colors duration-300 rounded-full py-6"
                                         />
                                     </div>
-                                    <Button className="w-full bg-[#A4161A] hover:bg-[#BA181B] text-white transition-colors duration-300 flex items-center justify-center rounded-full py-6">
+                                    <Button className="w-full bg-blue-600 hover:bg-blue-600 text-white transition-colors duration-300 flex items-center justify-center rounded-full py-6">
                                         Log In as Mentee <ArrowRight className="ml-2" size={18} />
                                     </Button>
                                 </form>
-                                <p className="mt-6 text-center text-sm text-[#660708]">
+                                <p className="mt-6 text-center text-sm text-blue-600">
                                     Don't have an account?{" "}
-                                    <Link href="/signup" className="font-medium text-[#E5383B] hover:underline transition-colors duration-300">
+                                    <Link href="/signup" className="font-medium text-blue-600 hover:underline transition-colors duration-300">
                                         Sign up
                                     </Link>
                                 </p>
