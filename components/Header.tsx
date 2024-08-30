@@ -21,6 +21,8 @@ const MobileMenu: React.FC<MobileMenuProps> = ({ isOpen, onClose }) => {
                 <Link href="/signup" className="text-white py-2 hover:text-primary transition-colors" onClick={onClose}>Become a Mentor</Link>
                 <Link href="/seminars" className="text-white py-2 hover:text-primary transition-colors" onClick={onClose}>Seminars</Link>
                 <Link href="/cources" className="text-white py-2 hover:text-primary transition-colors" onClick={onClose}>Courses</Link>
+                <Link href="/events" className="text-white py-2 hover:text-primary transition-colors" onClick={onClose}>Events</Link>
+                <Link href="/opportunities" className="text-white py-2 hover:text-primary transition-colors" onClick={onClose}>Opportunities</Link>
                 <Link href="/blog" className="text-white py-2 hover:text-primary transition-colors" onClick={onClose}>Blog</Link>
                 <Link href="/library" className="text-white py-2 hover:text-primary transition-colors" onClick={onClose}>Library</Link>
                 <Link href="#" className="text-white py-2 hover:text-primary transition-colors" onClick={onClose}>Pricing</Link>
@@ -47,6 +49,8 @@ export default function Header() {
                         <li><Link href="/login" className="hover:text-primary transition-colors">Become a Mentor</Link></li>
                         <li><Link href="/seminars" className="hover:text-primary transition-colors">Seminars</Link></li>
                         <li><Link href="/cources" className="hover:text-primary transition-colors">Courses</Link></li>
+                        <li><Link href="/events" className="hover:text-primary transition-colors">Events</Link></li>
+                        <li><Link href="/opportunities" className="hover:text-primary transition-colors">Opportunities</Link></li>
                         <li><Link href="/blog" className="hover:text-primary transition-colors">Blog</Link></li>
                         <li><Link href="/library" className="hover:text-primary transition-colors">Library</Link></li>
                         <li><Link href="#" className="hover:text-primary transition-colors">Pricing</Link></li>
