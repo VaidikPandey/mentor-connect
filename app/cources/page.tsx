@@ -39,13 +39,31 @@ interface Course {
     thumbnail: string;
 }
 
-
 export default function CoursesPage() {
     const [searchTerm, setSearchTerm] = useState("")
     const [selectedCategory, setSelectedCategory] = useState("All")
     const [selectedLevel, setSelectedLevel] = useState("All")
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
     const [courses, setCourses] = useState<Course[]>([])
+    const [isModalOpen, setIsModalOpen] = useState(false)
+    const [newCourse, setNewCourse] = useState<Course>({
+        id: 0,
+        title: '',
+        description: '',
+        price: 0,
+        isPaid: false,
+        videos: [],
+        pdfs: [],
+        mentorId: '',
+        category: '',
+        duration: '',
+        lessons: 0,
+        students: 0,
+        rating: 0,
+        level: '',
+        instructor: '',
+        thumbnail: '',
+    })
 
     useEffect(() => {
         // Fetch courses from the backend
@@ -60,6 +78,24 @@ export default function CoursesPage() {
         (selectedCategory === "All" || course.category === selectedCategory) &&
         (selectedLevel === "All" || course.level.includes(selectedLevel))
     )
+
+    const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+        const { name, value } = e.target
+        setNewCourse(prevCourse => ({ ...prevCourse, [name]: value }))
+    }
+
+    const handleSelectChange = (name: string, value: string) => {
+        setNewCourse(prevCourse => ({ ...prevCourse, [name]: value }))
+    }
+
+    const handlePublishCourse = () => {
+        axios.post('/api/courses', newCourse)
+            .then(response => {
+                setCourses([...courses, response.data])
+                setIsModalOpen(false)
+            })
+            .catch(error => console.error('Error publishing course:', error))
+    }
 
     return (
         <div className="min-h-screen flex flex-col bg-gradient-to-b from-base-200 to-base-300 text-base-content">
@@ -101,9 +137,12 @@ export default function CoursesPage() {
                                 ))}
                             </SelectContent>
                         </Select>
-                        <Link href="/courses/add" className="btn btn-primary bg-blue-600 text-white hover:bg-black rounded-lg px-4 py-2 transition-colors text-sm">
+                        <button
+                            onClick={() => setIsModalOpen(true)}
+                            className="btn btn-primary bg-blue-600 text-white hover:bg-black rounded-lg px-4 py-2 transition-colors text-sm"
+                        >
                             Add Course
-                        </Link>
+                        </button>
                     </div>
                 </div>
 
@@ -140,7 +179,6 @@ export default function CoursesPage() {
                                             <Briefcase size={14} className="mr-2" />
                                             Instructor: {course.instructor}
                                         </p>
-                                        {/* New fields */}
                                         <p className="flex items-center">
                                             <Briefcase size={14} className="mr-2" />
                                             Description: {course.description}
@@ -166,6 +204,112 @@ export default function CoursesPage() {
                     ))}
                 </div>
             </main>
+
+            {isModalOpen && (
+                <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
+                    <div className="bg-white p-8 rounded-lg shadow-lg w-11/12 md:w-2/3 lg:w-1/2">
+                        <h2 className="text-2xl font-bold mb-4">Add New Course</h2>
+                        <form>
+                            <div className="space-y-4">
+                                <input
+                                    type="text"
+                                    name="title"
+                                    placeholder="Course Title"
+                                    value={newCourse.title}
+                                    onChange={handleInputChange}
+                                    className="input input-bordered w-full  border border-blue-600 rounded p-1/5"
+                                />
+                                <textarea
+                                    name="description"
+                                    placeholder="Course Description"
+                                    value={newCourse.description}
+                                    onChange={handleInputChange}
+                                    className="textarea textarea-bordered w-full border border-blue-600 rounded p-1/5"
+                                />
+                                <label htmlFor="No of lectures">No of lectures: </label>
+                                <input
+                                    type="number"
+                                    name="price"
+                                    placeholder="Price"
+                                    value={newCourse.price}
+                                    onChange={handleInputChange}
+                                    className="input input-bordered w-full border border-blue-600 rounded p-1/5"
+                                />
+                                <Select value={newCourse.category} onValueChange={(value) => handleSelectChange('category', value)}>
+                                    <SelectTrigger className="w-full bg-white border  border-blue-600 rounded p-1/5">
+                                        <SelectValue placeholder="Category" />
+                                    </SelectTrigger>
+                                    <SelectContent className="bg-white">
+                                        {categories.map(category => (
+                                            <SelectItem key={category} value={category} className="hover:bg-gray-100">{category}</SelectItem>
+                                        ))}
+                                    </SelectContent>
+                                </Select>
+                                <Select value={newCourse.level} onValueChange={(value) => handleSelectChange('level', value)}>
+                                    <SelectTrigger className="w-full bg-white border border-blue-600 rounded p-1/5">
+                                        <SelectValue placeholder="Level" />
+                                    </SelectTrigger>
+                                    <SelectContent className="bg-white">
+                                        {levels.map(level => (
+                                            <SelectItem key={level} value={level} className="hover:bg-gray-100">{level}</SelectItem>
+                                        ))}
+                                    </SelectContent>
+                                </Select>
+                                <input
+                                    type="text"
+                                    name="duration"
+                                    placeholder="Duration"
+                                    value={newCourse.duration}
+                                    onChange={handleInputChange}
+                                    className="input input-bordered w-full border border-blue-600 rounded p-1/5"
+                                />
+                                <input
+                                    type="text"
+                                    name="instructor"
+                                    placeholder="Instructor"
+                                    value={newCourse.instructor}
+                                    onChange={handleInputChange}
+                                    className="input input-bordered w-full border border-blue-600 rounded p-1/5"
+                                />
+                                <input
+                                    type="text"
+                                    name="thumbnail"
+                                    placeholder="Thumbnail URL"
+                                    value={newCourse.thumbnail}
+                                    onChange={handleInputChange}
+                                    className="input input-bordered w-full border border-blue-600 rounded p-1/5"
+                                />
+                                <label className="flex items-center space-x-2">
+                                    <input
+                                        type="checkbox"
+                                        name="isPaid"
+                                        checked={newCourse.isPaid}
+                                        onChange={() => setNewCourse({ ...newCourse, isPaid: !newCourse.isPaid })}
+                                        className="checkbox checkbox-primary border border-blue-600 rounded p-1/5"
+                                    />
+                                    <span>Is Paid?</span>
+                                </label>
+                            </div>
+                            <div className="mt-6 flex justify-end space-x-4">
+                                <button
+                                    type="button"
+                                    onClick={() => setIsModalOpen(false)}
+                                    className="btn btn-secondary"
+                                >
+                                    Cancel
+                                </button>
+                                <button
+                                    type="button"
+                                    onClick={handlePublishCourse}
+                                    className="btn btn-primary bg-blue-600 text-white hover:bg-black p-2 rounded"
+                                >
+                                    Publish Course
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            )}
 
             <Footer />
         </div>
